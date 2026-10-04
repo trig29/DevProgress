@@ -3,7 +3,9 @@ const labels = {not_started:'未开始',in_progress:'进行中',implemented_unve
 const dimensionNames = {story:'剧情',art:'美术与场景',system:'系统',polish:'打磨'};
 const colors = {overall:'#29382e',story:'#52694d',art:'#9b6945',system:'#4f6f85',polish:'#986372'};
 const seriesNames = {overall:'整体',...dimensionNames};
-let current, history;
+let current, history, siteContent;
+let selectedDimension = 'all';
+const completedLast = (a,b) => Number(a.status==='done') - Number(b.status==='done');
 const activeSeries = new Set(Object.keys(seriesNames));
 
 function el(tag, text, className) {
@@ -47,7 +49,8 @@ async function load() {
   $('loading').hidden=false;$('error').hidden=true;$('dashboard').hidden=true;
   try {
     const get = async (path) => {const response=await fetch(path,{cache:'no-store'});if(!response.ok) throw new Error(`数据读取失败（HTTP ${response.status}）。`);return response.json();};
-    const [data,timeline]=await Promise.all([get('./data/current.json'),get('./data/history.json')]);
+    const [data,timeline,copy]=await Promise.all([get('./data/current.json'),get('./data/history.json'),get('./data/content.json').catch(()=>null)]);
+    siteContent=copy;
     validateData(data,timeline);current=data;history=timeline.snapshots;
     render();$('loading').hidden=true;$('dashboard').hidden=false;
   } catch(error) {
@@ -56,19 +59,42 @@ async function load() {
   }
 }
 function render() {
-  document.title=current.project.title;
+  const page=document.body.dataset.page;
+  const pageNames={index:'进度概览',dimensions:'维度进度',updates:'最近更新',todos:'Todo 清单',history:'历史记录',method:'计算说明'};
+  const brand=document.querySelector('.brand');
+  brand.setAttribute('aria-label',current.project.title+'，进度概览');
+  const brandText=brand.querySelector('span').firstChild;
+  if(brandText?.nodeType===Node.TEXT_NODE) brandText.textContent=current.project.title.replace(/ 开发进度$/, '');
+  const copy=siteContent?.pages?.[page];
+  if(copy) {
+    document.querySelector('#dashboard h1').textContent=copy.title;
+    document.querySelector('#dashboard .intro').textContent=copy.intro;
+  }
+  document.title=`${copy?.title||pageNames[page]} · ${current.project.title}`;
+  for(const [id,text] of Object.entries(siteContent?.text||{})) if($(id)) $(id).textContent=text;
+  for(const link of document.querySelectorAll('nav a')) {
+    const key=link.getAttribute('href').split('/').pop().replace('.html','');
+    if(siteContent?.pages?.[key]) link.textContent=siteContent.pages[key].title;
+  }
   $('phase').textContent=current.project.phase_label;
   $('evaluated').textContent=dateLabel(current.evaluated_at);
   $('published').textContent=dateLabel(current.published_at);
-  $('overall-value').textContent=current.overall===null?'评估待完善':pct(current.overall);
-  $('overall-value').classList.toggle('known',current.overall!==null);
-  $('overall-meter').replaceChildren(meter(current.overall,'Demo整体完成度'));
-  $('overall-reasons').replaceChildren(...current.missing_reasons.map(reason=>el('p',reason)));
-  if(!current.missing_reasons.length) $('overall-reasons').append(el('p','必要数据已齐备，按当前已确认规则计算。'));
-  renderDimensions();renderUpdates();renderTodos();renderHistory();
-  const r=current.rules;
-  $('rule-summary').textContent=`剧情 ${Math.round(r.dimension_shares.story*100)}%、美术与场景 ${Math.round(r.dimension_shares.art*100)}%、系统 ${Math.round(r.dimension_shares.system*100)}%、手动打磨 ${Math.round(r.dimension_shares.polish*100)}%。UI 占美术维度 ${Math.round(r.art_ui_share*100)}%。状态计分档位：${Object.values(r.status_factors).map(f=>Math.round(f*100)+'%').join(' / ')}。`;
-  $('versions').textContent=`范围 ${current.scope_version} · 规则 ${current.rules_version} · ${r.approval==='confirmed'?'评分规则已确认':'评分规则为草案'} · 数据生成 ${dateLabel(current.generated_at)}（美国东部时间）`;
+  if(page==='index') {
+    $('overall-value').textContent=current.overall===null?'评估待完善':pct(current.overall);
+    $('overall-value').classList.toggle('known',current.overall!==null);
+    $('overall-meter').replaceChildren(meter(current.overall,'Demo整体完成度'));
+    $('overall-reasons').replaceChildren(...current.missing_reasons.map(reason=>el('p',reason)));
+    if(!current.missing_reasons.length) $('overall-reasons').append(el('p','必要数据已齐备，按当前已确认规则计算。'));
+  }
+  if(page==='dimensions') renderDimensions();
+  if(page==='updates') renderUpdates();
+  if(page==='todos') renderTodos();
+  if(page==='history') renderHistory();
+  if(page==='method') {
+    const r=current.rules;
+    $('rule-summary').textContent=`剧情 ${Math.round(r.dimension_shares.story*100)}%、美术与场景 ${Math.round(r.dimension_shares.art*100)}%、系统 ${Math.round(r.dimension_shares.system*100)}%、手动打磨 ${Math.round(r.dimension_shares.polish*100)}%。UI 占美术维度 ${Math.round(r.art_ui_share*100)}%。状态计分档位：${Object.values(r.status_factors).map(f=>Math.round(f*100)+'%').join(' / ')}。`;
+    $('versions').textContent=`范围 ${current.scope_version} · 规则 ${current.rules_version} · ${r.approval==='confirmed'?'评分规则已确认':'评分规则为草案'} · 数据生成 ${dateLabel(current.generated_at)}（美国东部时间）`;
+  }
 }
 function renderDimensions() {
   $('dimensions').replaceChildren(...current.dimensions.map(d=>{
@@ -93,9 +119,9 @@ function renderUpdates() {
   $('baseline').textContent=current.sources.map(s=>`${s.ref} · ${s.commit.slice(0,7)}`).join(' / ');
 }
 function renderTodos() {
-  const dimension=$('dimension-filter').value,status=$('status-filter').value,scope=$('scope-filter').value;
+  const dimension=selectedDimension,status=$('status-filter').value,scope=$('scope-filter').value;
   const matches = (task) => (status==='all'||(status==='feature_branch'?task.implementation_location==='feature_branch':(task.status||'pending_confirmation')===status)) && (scope!=='remaining'||task.status!=='done') && (scope!=='completed'||task.status==='done');
-  const visible=current.groups.filter(g=>(dimension==='all'||g.dimension===dimension)&&g.scope===(scope==='future'?'future':'demo')).map(g=>({...g,visibleChildren:g.children.filter(matches)})).filter(g=>g.visibleChildren.length);
+  const visible=current.groups.filter(g=>(dimension==='all'||g.dimension===dimension)&&g.scope===(scope==='future'?'future':'demo')).map(g=>({...g,visibleChildren:g.children.filter(matches).sort(completedLast)})).filter(g=>g.visibleChildren.length).sort(completedLast);
   const taskCount=visible.reduce((n,g)=>n+g.visibleChildren.length,0);
   $('filter-count').textContent=`${visible.length} 个大项 · ${taskCount} 个子项 / Demo 共 ${current.task_counts.total} 个子项`;
   $('empty').hidden=visible.length>0;
@@ -176,7 +202,16 @@ function renderChart() {
   $('chart').replaceChildren(svg);
   $('chart-note').textContent=!activeSeries.size?'尚未选择趋势系列。':!known?'所选系列尚无可绘制的已知分数。未知值没有补成零。':history.length===1?'目前只有首次基线，展示真实已知分数，尚未形成趋势。未知维度不绘制。':'未知值不连接；范围或规则变化处断开。图表记录进展，不预测发布日期。';
 }
-window.addEventListener('resize',()=>{if(current)renderChart();});
+window.addEventListener('resize',()=>{if(current&&document.body.dataset.page==='history')renderChart();});
 $('retry').addEventListener('click',load);
-for(const id of ['dimension-filter','status-filter','scope-filter']) $(id).addEventListener('change',renderTodos);
+for(const button of document.querySelectorAll('[data-dimension]')) {
+  button.addEventListener('click',()=>{
+    selectedDimension=button.dataset.dimension;
+    for(const other of document.querySelectorAll('[data-dimension]')) other.setAttribute('aria-pressed',String(other===button));
+    $('status-filter').value='all';
+    $('scope-filter').value='demo';
+    renderTodos();
+  });
+}
+for(const id of ['status-filter','scope-filter']) $(id)?.addEventListener('change',renderTodos);
 load();

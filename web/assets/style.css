@@ -4,3 +4,28 @@
 @media(max-width:1000px){.wrap{width:calc(100% - 56px)}.hero{gap:30px}h1{font-size:36px}.dimension-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card-review{min-height:0}.masthead nav{gap:18px}.filter-count{width:100%;margin-top:3px}.overall-paper{padding:20px}.stamp{right:20px}.overall-value{font-size:27px}.update-layout{gap:24px}}
 @media(max-width:640px){.wrap{width:calc(100% - 36px)}.masthead{padding:19px 0;align-items:start}.brand{font-size:19px;gap:9px}.brand small{font-size:8px;letter-spacing:1.3px}.envelope{width:27px}.masthead nav{gap:12px;font-size:10px;padding-top:6px}.masthead nav a:last-child{display:none}.hero{grid-template-columns:1fr;padding:30px 0;gap:24px}h1{font-size:37px;margin:15px 0}.intro{margin-bottom:17px}.meta{gap:13px;font-size:10px}.overall-paper{padding:20px 21px;box-shadow:4px 4px 0 #e9e8dc}.overall-value{font-size:29px}.section-heading{align-items:start;gap:12px}.section-heading.compact{align-items:start}.section-aside{font-size:10px}.compact h2{font-size:12px}.dimension-grid{grid-template-columns:1fr;gap:12px}.dimension-card{padding:17px 20px}.dimension-score{margin:10px 0 8px}.remaining-list{margin-top:11px}.updates-section,.todo-section,.history-section,.method-section{margin-top:32px;padding-top:26px}h2{font-size:23px}.update-layout{grid-template-columns:1fr;gap:22px}.highlights li{font-size:12px}.delta-tag{font-size:10px}.text-link{font-size:10px;padding-top:6px}.filters{padding:12px;gap:10px;display:grid;grid-template-columns:1fr 1fr}.filters label:last-of-type{grid-column:1 / -1}.filters select{min-width:0;width:100%;font-size:11px}.filter-count{grid-column:1 / -1;margin:2px 0 0;font-size:10px}.todo-grid{grid-template-columns:1fr}.todo-group summary{padding:14px}.group-name{font-size:12px}.group-subtitle{font-size:9px}.chart-paper{padding:15px 10px}.chart-paper fieldset{gap:8px 12px}.series-label{font-size:10px}.history-entry{grid-template-columns:1fr;gap:8px}.history-date{font-size:11px}.method-grid{grid-template-columns:1fr;gap:21px}.footer{font-size:9px;gap:10px;flex-wrap:wrap}.footer-pixels{width:17px;margin-left:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+/* Shared navigation and standalone pages. */
+.masthead nav a[aria-current=page]{color:var(--green);font-weight:600;border-bottom:2px solid var(--green);padding-bottom:5px}
+.brand small{font-size:11px;letter-spacing:1px}
+.page-heading{padding:38px 0 27px;border-bottom:1px solid var(--line);margin-bottom:30px}
+.page-heading h1{font-size:36px;margin:12px 0}
+.page-heading .intro{margin-bottom:17px}
+body:not([data-page=index]) .updates-section,body:not([data-page=index]) .todo-section,body:not([data-page=index]) .history-section,body:not([data-page=index]) .method-section{margin-top:0;padding-top:0;border-top:0}
+body[data-page=dimensions] .compact h2{font-family:var(--serif);font-size:23px}
+@media(max-width:1000px){.masthead{flex-wrap:wrap;gap:22px}.masthead nav{flex-wrap:wrap;gap:14px 22px}}
+@media(max-width:640px){.masthead nav{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 18px;font-size:12px;padding:0}.masthead nav a:last-child{display:inline}.masthead nav a{padding:4px 0;justify-self:start}.page-heading{padding-top:28px}.page-heading h1{font-size:30px}.hero{padding-bottom:10px}.footer{margin-top:32px}}
+
+/* Todo dimension navigation and distinct task states. */
+.dimension-switch{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.dimension-switch button{padding:8px 18px;border:1px solid #adb7a6;background:var(--surface);border-radius:3px;font-size:12px}
+.dimension-switch button[aria-pressed="true"]{background:#354f3a;color:#fff;border-color:#354f3a}
+.dimension-switch button:hover{border-color:#354f3a}
+.todo-grid{grid-template-columns:minmax(0,1fr)}
+.status-pill{border:1px solid transparent;font-size:10px;font-weight:600}
+.status-pill.not_started{background:#e8eaee;color:#454e5c;border-color:#b9c0cb}
+.status-pill.in_progress{background:#dcecff;color:#174e91;border-color:#8fb8e8}
+.status-pill.implemented_unverified{background:#fff0cd;color:#795100;border-color:#ddba62}
+.status-pill.done{background:#d7efdd;color:#205b31;border-color:#88bd95}
+.status-pill.pending_confirmation{background:#eee0f6;color:#704188;border-color:#b997ca}
+.branch-pill{background:#e1f1f2;color:#245f65;border-color:#92bcbf}
+@media(max-width:640px){.dimension-switch{gap:8px}.dimension-switch button{flex:1 1 auto;padding:8px 12px}.filters label:last-of-type{grid-column:auto}}

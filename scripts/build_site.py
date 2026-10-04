@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 from validate_todo import validate
 from schema_check import validate_schema
 from progress import canonical, make_snapshot, compare
+from site_content import load_content
 
 
 def read(path):
@@ -45,6 +46,7 @@ def build(project=ROOT, output=None, now=None):
     if errors:
         raise ValueError('\n'.join(errors))
     config = read(project/'site.config.json')
+    content = load_content(project)
     for source in todo['sources']:
         if source['kind']=='git' and source.get('dirty'):
             raise ValueError('Public evaluation must use a committed baseline; record uncommitted changes separately')
@@ -81,12 +83,13 @@ def build(project=ROOT, output=None, now=None):
         write(staging/'data'/'current.json', snapshot)
         write(staging/'data'/'history.json', history)
         write(staging/'data'/'todo.json', todo)
+        write(staging/'data'/'content.json', content)
         shutil.copy2(project/'todo.schema.json', staging/'data'/'todo.schema.json')
         shutil.copytree(project/'schemas', staging/'data'/'schemas')
         (staging/'.nojekyll').touch()
         (staging/'.devprogress-output').touch()
         # No source docs, local config, skill installation or game files are exported.
-        allowed = {'index.html','assets','data','.nojekyll','.devprogress-output'}
+        allowed = {'index.html','dimensions.html','updates.html','todos.html','history.html','method.html','assets','data','.nojekyll','.devprogress-output'}
         if set(p.name for p in staging.iterdir()) != allowed:
             raise ValueError('Unexpected file in deployment output')
         # Save history only after all validation/export steps have succeeded.

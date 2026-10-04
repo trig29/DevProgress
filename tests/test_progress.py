@@ -165,7 +165,7 @@ class ExportTests(unittest.TestCase):
         output=self.project/'site'
         self.assertEqual(read(output/'data'/'todo.json'),read(self.project/'todo.json'))
         self.assertFalse((output/'剧情正文.md').exists());self.assertFalse((output/'config.local.json').exists())
-        self.assertEqual(set(p.name for p in output.iterdir()),{'index.html','assets','data','.nojekyll','.devprogress-output'})
+        self.assertEqual(set(p.name for p in output.iterdir()),{'index.html','dimensions.html','updates.html','todos.html','history.html','method.html','assets','data','.nojekyll','.devprogress-output'})
 
     def test_invalid_data_leaves_previous_export_and_history_intact(self):
         build(self.project);original=(self.project/'history'/'snapshots.json').read_bytes();output=(self.project/'site'/'data'/'current.json').read_bytes()

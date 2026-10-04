@@ -4,9 +4,9 @@
   "phase_label": "Demo / 序章",
   "timezone": "America/New_York",
   "publication": {
-    "enabled": false,
-    "repository": null,
-    "url": null,
+    "enabled": true,
+    "repository": "trig29/DevProgress",
+    "url": "https://trig29.github.io/DevProgress/",
     "daily_updates": "publish_after_first_authorized_deployment"
   }
 }

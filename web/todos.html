@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3e9">
+  <meta name="description" content="北四楼来信的序章 Demo 开发记录：基于 Todo、静态实现证据与开发者验收的进度。">
+  <title>Todo 清单 · 北四楼来信 开发进度</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="stylesheet" href="./assets/style.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body data-page="todos">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="masthead wrap">
+    <a class="brand" href="./index.html" aria-label="北四楼来信，进度概览">
+      <svg class="envelope" viewBox="0 0 32 26" aria-hidden="true"><path d="M2 3h28v20H2zM2 3l14 12L30 3M2 23l10-10m18 10L20 13"/></svg>
+      <span>北四楼来信<small>开发进度</small></span>
+    </a>
+    <nav aria-label="页面导航"><a href="./index.html">进度概览</a><a href="./dimensions.html">维度进度</a><a href="./updates.html">最近更新</a><a href="./todos.html" aria-current="page">Todo 清单</a><a href="./history.html">历史记录</a><a href="./method.html">计算说明</a></nav>
+  </header>
+  <main id="main" class="wrap">
+    <div id="loading" class="load-panel" role="status">正在读取进度数据…</div>
+    <section id="error" class="load-panel error-panel" hidden aria-labelledby="error-title"><h1 id="error-title">进度数据加载失败</h1><p id="error-message"></p><button id="retry" type="button">重新读取数据</button></section>
+    <div id="dashboard" hidden><header class="page-heading"><p class="eyebrow">开发进度 <span class="phase" id="phase"></span></p><h1>Todo 清单</h1><p class="intro">按维度、状态和范围查看任务及完成条件。</p><dl class="meta"><div><dt>最近评估</dt><dd id="evaluated"></dd></div><div><dt>网站发布</dt><dd id="published"></dd></div></dl></header>
+      <section id="todos" class="todo-section" aria-labelledby="todos-title">
+        <div class="section-heading"><div><h2 id="todos-title">任务列表</h2></div><a class="text-link" href="./data/todo.json" download="北四楼来信-todo.json">下载完整 Todo <span aria-hidden="true">↗</span></a></div>
+        <div class="dimension-switch" role="group" aria-label="选择任务维度">
+          <button type="button" data-dimension="all" aria-pressed="true">全部维度</button>
+          <button type="button" data-dimension="story" aria-pressed="false">剧情</button>
+          <button type="button" data-dimension="art" aria-pressed="false">美术与场景</button>
+          <button type="button" data-dimension="system" aria-pressed="false">系统</button>
+        </div>
+        <div class="filters">
+          <label>状态<select id="status-filter"><option value="all">全部状态</option><option value="not_started">未开始</option><option value="in_progress">进行中</option><option value="implemented_unverified">实现完成待验证</option><option value="done">已完成</option><option value="pending_confirmation">待确认</option><option value="feature_branch">功能分支成果</option></select></label>
+          <label>查看<select id="scope-filter"><option value="demo">Demo · 全部任务</option><option value="remaining">Demo · 尚未完成</option><option value="completed">Demo · 已完成</option><option value="future">后续版本计划</option></select></label>
+          <p id="filter-count" class="filter-count" role="status" aria-live="polite"></p>
+        </div>
+        <p id="todo-note" class="small-note todo-note">任务数量仅供浏览参考，完成度按相对权重计算。展开大项可查看必要子项。已完成的大项和子项排在各自列表末尾。</p>
+        <div id="todo-groups" class="todo-grid"></div><p id="empty" class="empty-state" hidden>此筛选下没有任务。可以切换维度、状态或查看范围。</p>
+      </section>
+    </div>
+    <noscript><p class="load-panel">请启用 JavaScript 以浏览进度。也可以<a href="./data/todo.json">读取完整 Todo JSON</a>。</p></noscript>
+  </main>
+  <footer class="footer wrap"><span>北四楼来信 <span class="footer-dot">·</span> 开发进度</span><span id="footer-note">Todo 驱动的开发进度记录</span></footer>
+</body>
+</html>

@@ -5,39 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f3e9">
   <meta name="description" content="北四楼来信的序章 Demo 开发记录：基于 Todo、静态实现证据与开发者验收的进度。">
-  <title>进度概览 · 北四楼来信 开发进度</title>
+  <title>维度进度 · 北四楼来信 开发进度</title>
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <link rel="stylesheet" href="./assets/style.css">
   <script type="module" src="./assets/app.js"></script>
 </head>
-<body data-page="index">
+<body data-page="dimensions">
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="masthead wrap">
     <a class="brand" href="./index.html" aria-label="北四楼来信，进度概览">
       <svg class="envelope" viewBox="0 0 32 26" aria-hidden="true"><path d="M2 3h28v20H2zM2 3l14 12L30 3M2 23l10-10m18 10L20 13"/></svg>
       <span>北四楼来信<small>开发进度</small></span>
     </a>
-    <nav aria-label="页面导航"><a href="./index.html" aria-current="page">进度概览</a><a href="./dimensions.html">维度进度</a><a href="./updates.html">最近更新</a><a href="./todos.html">Todo 清单</a><a href="./history.html">历史记录</a><a href="./method.html">计算说明</a></nav>
+    <nav aria-label="页面导航"><a href="./index.html">进度概览</a><a href="./dimensions.html" aria-current="page">维度进度</a><a href="./updates.html">最近更新</a><a href="./todos.html">Todo 清单</a><a href="./history.html">历史记录</a><a href="./method.html">计算说明</a></nav>
   </header>
   <main id="main" class="wrap">
     <div id="loading" class="load-panel" role="status">正在读取进度数据…</div>
     <section id="error" class="load-panel error-panel" hidden aria-labelledby="error-title"><h1 id="error-title">进度数据加载失败</h1><p id="error-message"></p><button id="retry" type="button">重新读取数据</button></section>
-    <div id="dashboard" hidden>
-      <section class="hero" aria-labelledby="page-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="pixel-square"></span> 开发进度 <span class="phase" id="phase"></span></p>
-          <h1 id="page-title">进度概览</h1>
-          <p class="intro">当前 Demo 阶段的整体完成度、评估时间与发布状态。</p>
-          <dl class="meta"><div><dt>最近评估</dt><dd id="evaluated"></dd></div><div><dt>网站发布</dt><dd id="published"></dd></div></dl>
-        </div>
-        <div class="overall-paper">
-          <div class="paper-top"><span>当前阶段 · 总进度</span></div>
-          <p id="overall-value" class="overall-value"></p>
-          <div id="overall-meter"></div>
-          <p class="formula">基础内容 <strong>70%</strong><span>＋</span>手动打磨 <strong>30%</strong></p>
-          <div id="overall-reasons" class="overall-reasons"></div>
-          <p id="method-note" class="method-note">依据静态评估与开发者验收记录 · 不代表工期</p>
-        </div>
+    <div id="dashboard" hidden><header class="page-heading"><p class="eyebrow">开发进度 <span class="phase" id="phase"></span></p><h1>维度进度</h1><p class="intro">剧情、美术与场景、系统和打磨的完成度、权重与主要剩余内容。</p><dl class="meta"><div><dt>最近评估</dt><dd id="evaluated"></dd></div><div><dt>网站发布</dt><dd id="published"></dd></div></dl></header>
+      <section aria-labelledby="dimensions-title" class="dimension-section">
+        <div class="section-heading compact"><h2 id="dimensions-title">维度完成度</h2><span class="section-aside">维度完成度 ≠ 整体贡献</span></div>
+        <div id="dimensions" class="dimension-grid"></div>
       </section>
     </div>
     <noscript><p class="load-panel">请启用 JavaScript 以浏览进度。也可以<a href="./data/todo.json">读取完整 Todo JSON</a>。</p></noscript>

@@ -342,7 +342,8 @@
                   "demo_expansion",
                   "rule_change",
                   "manual_score_update",
-                  "refinement"
+                  "refinement",
+                  "future"
                 ]
               },
               "text": {
