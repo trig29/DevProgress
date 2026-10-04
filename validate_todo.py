@@ -20,7 +20,7 @@ def validate(data):
         check(len(ids) == len(set(ids)), f'{label}: duplicate IDs')
         return {record['id']: record for record in records}
 
-    check(data['schema_version'] in {'1.0.0', '1.1.0'}, 'unsupported schema version')
+    check(data['schema_version'] in {'1.2.0'}, 'unsupported schema version')
     items = index(data['items'], 'items')
     evidence = index(data['evidence'], 'evidence')
     sources = index(data['sources'], 'sources')
@@ -41,7 +41,6 @@ def validate(data):
         check(item['status'] is None or item['status'] in states, f'{id}: invalid status')
         check(all(e in evidence for e in item['evidence_ids']), f'{id}: broken evidence reference')
         check(all(v in plans for v in item['verification_ids']), f'{id}: broken verification reference')
-        check(all(d in items and d != id for d in item['dependencies']), f'{id}: broken/self dependency')
         if item['kind'] == 'task':
             parent = items.get(item['parent_id'])
             check(parent is not None and parent['kind'] == 'group', f'{id}: task must have a group parent')
@@ -77,24 +76,6 @@ def validate(data):
     for section in ['candidate_notes', 'pending_decisions']:
         for record in data[section]:
             check(all(id in items for id in record['related_ids']), f"{record['id']}: broken related ID")
-    # Three colours detect dependency cycles without executing task work.
-    visiting, visited = set(), set()
-
-    def walk(id):
-        if id in visiting:
-            errors.append(f'{id}: dependency cycle')
-            return
-        if id in visited:
-            return
-        visiting.add(id)
-        for dependency in items[id]['dependencies']:
-            if dependency in items:
-                walk(dependency)
-        visiting.remove(id)
-        visited.add(id)
-
-    for id in items:
-        walk(id)
     return errors
 
 

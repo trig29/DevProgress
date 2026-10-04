@@ -1,6 +1,6 @@
 {
   "$schema": "./todo.schema.json",
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "project": {
     "id": "godot-rpg-demo",
     "title": "北四楼来信 开发进度",
@@ -128,7 +128,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -149,7 +148,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "资料位置未提供；确认后细化现有主线组并保持原总权重。"
@@ -166,7 +164,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "按现有实现暂分组；不是已确认的剧情章节划分。"
@@ -186,9 +183,6 @@
       ],
       "evidence_ids": [
         "E-OPEN"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -210,9 +204,6 @@
       "evidence_ids": [
         "E-OPEN"
       ],
-      "dependencies": [
-        "story.opening.content"
-      ],
       "verification_ids": [
         "V-STORY"
       ],
@@ -231,7 +222,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "按现有实现暂分组；不是已确认的剧情章节划分。"
@@ -251,9 +241,6 @@
       ],
       "evidence_ids": [
         "E-CLASS"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -275,9 +262,6 @@
       "evidence_ids": [
         "E-CLASS"
       ],
-      "dependencies": [
-        "story.classroom.content"
-      ],
       "verification_ids": [
         "V-STORY"
       ],
@@ -296,7 +280,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "按现有实现暂分组；不是已确认的剧情章节划分。"
@@ -316,9 +299,6 @@
       ],
       "evidence_ids": [
         "E-CAMPUS"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -340,9 +320,6 @@
       "evidence_ids": [
         "E-CAMPUS"
       ],
-      "dependencies": [
-        "story.campus.content"
-      ],
       "verification_ids": [
         "V-STORY"
       ],
@@ -361,7 +338,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "按现有实现暂分组；不是已确认的剧情章节划分。"
@@ -381,9 +357,6 @@
       ],
       "evidence_ids": [
         "E-ROOF"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -405,9 +378,6 @@
       "evidence_ids": [
         "E-ROOF"
       ],
-      "dependencies": [
-        "story.roof.content"
-      ],
       "verification_ids": [
         "V-STORY"
       ],
@@ -426,7 +396,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -448,9 +417,6 @@
         "E-AFTERMATH",
         "E-SCOPE"
       ],
-      "dependencies": [
-        "story.scope.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "预留分母；不认定 aftermath 名称代表确定剧情，也不将其直接标为整体未开始。"
@@ -471,9 +437,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "story.remainder.content"
-      ],
       "verification_ids": [
         "V-STORY"
       ],
@@ -492,7 +455,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -513,7 +475,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -534,9 +495,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "story.side_1.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -555,9 +513,6 @@
         "按设计条件触发并完成开头，重复交互与结束表现正确。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "story.side_1.content"
-      ],
       "verification_ids": [
         "V-SIDE"
       ],
@@ -576,7 +531,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -597,7 +551,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -618,9 +571,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "story.side_2.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -639,9 +589,6 @@
         "按设计条件触发并完成开头，重复交互与结束表现正确。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "story.side_2.content"
-      ],
       "verification_ids": [
         "V-SIDE"
       ],
@@ -660,7 +607,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -681,7 +627,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -702,9 +647,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "story.side_3.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -723,9 +665,6 @@
         "按设计条件触发并完成开头，重复交互与结束表现正确。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "story.side_3.content"
-      ],
       "verification_ids": [
         "V-SIDE"
       ],
@@ -744,7 +683,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -765,9 +703,6 @@
       "evidence_ids": [
         "E-NPC"
       ],
-      "dependencies": [
-        "story.scope.design"
-      ],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -786,9 +721,6 @@
         "在允许探索时可触发必要对话，重复交互符合设计。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "story.npc.content"
-      ],
       "verification_ids": [
         "V-SIDE"
       ],
@@ -807,7 +739,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -828,7 +759,6 @@
       "evidence_ids": [
         "E-MAP-foreword"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -849,9 +779,6 @@
       "evidence_ids": [
         "E-MAP-foreword"
       ],
-      "dependencies": [
-        "art.map_foreword.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -870,7 +797,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -891,7 +817,6 @@
       "evidence_ids": [
         "E-MAP-classroom_main"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -912,9 +837,6 @@
       "evidence_ids": [
         "E-MAP-classroom_main"
       ],
-      "dependencies": [
-        "art.map_classroom_main.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -933,7 +855,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -954,7 +875,6 @@
       "evidence_ids": [
         "E-MAP-courtyard"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -975,9 +895,6 @@
       "evidence_ids": [
         "E-MAP-courtyard"
       ],
-      "dependencies": [
-        "art.map_courtyard.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -996,7 +913,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -1017,7 +933,6 @@
       "evidence_ids": [
         "E-MAP-corridor_south_f1"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -1038,9 +953,6 @@
       "evidence_ids": [
         "E-MAP-corridor_south_f1"
       ],
-      "dependencies": [
-        "art.map_corridor_south_f1.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1059,7 +971,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -1080,7 +991,6 @@
       "evidence_ids": [
         "E-MAP-corridor_south_f2"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -1101,9 +1011,6 @@
       "evidence_ids": [
         "E-MAP-corridor_south_f2"
       ],
-      "dependencies": [
-        "art.map_corridor_south_f2.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1122,7 +1029,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -1143,7 +1049,6 @@
       "evidence_ids": [
         "E-MAP-corridor_north_f1"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -1164,9 +1069,6 @@
       "evidence_ids": [
         "E-MAP-corridor_north_f1"
       ],
-      "dependencies": [
-        "art.map_corridor_north_f1.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1185,7 +1087,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -1206,7 +1107,6 @@
       "evidence_ids": [
         "E-MAP-corridor_north_f2"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -1227,9 +1127,6 @@
       "evidence_ids": [
         "E-MAP-corridor_north_f2"
       ],
-      "dependencies": [
-        "art.map_corridor_north_f2.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1248,7 +1145,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -1269,7 +1165,6 @@
       "evidence_ids": [
         "E-MAP-corridor_north_f3"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -1290,9 +1185,6 @@
       "evidence_ids": [
         "E-MAP-corridor_north_f3"
       ],
-      "dependencies": [
-        "art.map_corridor_north_f3.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1311,7 +1203,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -1332,7 +1223,6 @@
       "evidence_ids": [
         "E-MAP-preroof"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -1353,9 +1243,6 @@
       "evidence_ids": [
         "E-MAP-preroof"
       ],
-      "dependencies": [
-        "art.map_preroof.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1374,7 +1261,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "剧情文案与事件计入剧情；通用探索机制计入系统；本组只计区域搭建、配置与区域验收。"
@@ -1395,7 +1281,6 @@
       "evidence_ids": [
         "E-MAP-roof"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -1416,9 +1301,6 @@
       "evidence_ids": [
         "E-MAP-roof"
       ],
-      "dependencies": [
-        "art.map_roof.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1437,7 +1319,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -1457,9 +1338,6 @@
       ],
       "evidence_ids": [
         "E-SCOPE"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": null,
@@ -1481,9 +1359,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "art.map_playground.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "main地图清单未见对应区域场景；ID仅用于Todo，不预先指定游戏路径。"
@@ -1502,9 +1377,6 @@
         "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.map_playground.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1523,7 +1395,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -1543,9 +1414,6 @@
       ],
       "evidence_ids": [
         "E-SCOPE"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": null,
@@ -1567,9 +1435,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "art.map_restroom.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "main地图清单未见对应区域场景；ID仅用于Todo，不预先指定游戏路径。"
@@ -1588,9 +1453,6 @@
         "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.map_restroom.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1609,7 +1471,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -1629,9 +1490,6 @@
       ],
       "evidence_ids": [
         "E-SCOPE"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": null,
@@ -1653,9 +1511,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "art.map_building_exterior.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "main地图清单未见对应区域场景；ID仅用于Todo，不预先指定游戏路径。"
@@ -1674,9 +1529,6 @@
         "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.map_building_exterior.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1695,7 +1547,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -1715,9 +1566,6 @@
       ],
       "evidence_ids": [
         "E-SCOPE"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": null,
@@ -1739,9 +1587,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "art.map_library.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "main地图清单未见对应区域场景；ID仅用于Todo，不预先指定游戏路径。"
@@ -1760,9 +1605,6 @@
         "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.map_library.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1781,7 +1623,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -1801,9 +1642,6 @@
       ],
       "evidence_ids": [
         "E-SCOPE"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": null,
@@ -1825,9 +1663,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "art.map_art_gallery.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "main地图清单未见对应区域场景；ID仅用于Todo，不预先指定游戏路径。"
@@ -1846,9 +1681,6 @@
         "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.map_art_gallery.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1867,7 +1699,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -1887,9 +1718,6 @@
       ],
       "evidence_ids": [
         "E-SCOPE"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": null,
@@ -1911,9 +1739,6 @@
       "evidence_ids": [
         "E-SCOPE"
       ],
-      "dependencies": [
-        "art.map_auditorium.design"
-      ],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "main地图清单未见对应区域场景；ID仅用于Todo，不预先指定游戏路径。"
@@ -1932,9 +1757,6 @@
         "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.map_auditorium.build"
-      ],
       "verification_ids": [
         "V-MAP"
       ],
@@ -1953,7 +1775,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -1973,9 +1794,6 @@
       ],
       "evidence_ids": [
         "E-ACTOR"
-      ],
-      "dependencies": [
-        "story.scope.design"
       ],
       "verification_ids": [],
       "implementation_location": null,
@@ -1997,9 +1815,6 @@
       "evidence_ids": [
         "E-ACTOR"
       ],
-      "dependencies": [
-        "art.characters.scope"
-      ],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "已有立绘加载与样例资源；不认定正式立绘已完成。"
@@ -2020,9 +1835,6 @@
       "evidence_ids": [
         "E-ACTOR"
       ],
-      "dependencies": [
-        "art.characters.scope"
-      ],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -2041,10 +1853,6 @@
         "正式立绘、基础运动与必要动作显示正确并获开发者确认。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.characters.portraits",
-        "art.characters.motion"
-      ],
       "verification_ids": [
         "V-ART"
       ],
@@ -2063,7 +1871,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2084,9 +1891,6 @@
       "evidence_ids": [
         "E-PERFORMANCE"
       ],
-      "dependencies": [
-        "story.scope.design"
-      ],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -2105,9 +1909,6 @@
         "关键剧情镜头、动作、转场自然，结束后视角正确。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.performance.content"
-      ],
       "verification_ids": [
         "V-ART"
       ],
@@ -2126,7 +1927,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2147,9 +1947,6 @@
       "evidence_ids": [
         "E-AUDIO"
       ],
-      "dependencies": [
-        "story.scope.design"
-      ],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": ""
@@ -2168,9 +1965,6 @@
         "标题、探索与关键事件音频符合设计，无不应残留的声音。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "art.audio.content"
-      ],
       "verification_ids": [
         "V-ART"
       ],
@@ -2195,7 +1989,6 @@
         "E-DIALOGUE",
         "E-RECORD"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "与打磨分开。建议占美术与场景维度20%，即总体5个百分点；权重未确认。"
@@ -2212,7 +2005,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2233,7 +2025,6 @@
       "evidence_ids": [
         "E-DIALOGUE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "已有基础实现；此项评价完整Demo能力，尚不声称全部实现。"
@@ -2252,9 +2043,6 @@
         "已设计的对白、选项、快进与自动播放正确工作，结束/中止恢复输入与镜头。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "system.dialogue.implementation"
-      ],
       "verification_ids": [
         "V-SYSTEM"
       ],
@@ -2273,7 +2061,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2294,7 +2081,6 @@
       "evidence_ids": [
         "E-EXPLORE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "已有基础实现；此项评价完整Demo能力，尚不声称全部实现。"
@@ -2313,9 +2099,6 @@
         "行走、奔跑、交互和切换可用，按已确认剧情条件开放/限制探索。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "system.exploration.implementation"
-      ],
       "verification_ids": [
         "V-SYSTEM"
       ],
@@ -2334,7 +2117,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2355,7 +2137,6 @@
       "evidence_ids": [
         "E-EVENT"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "已有基础实现；此项评价完整Demo能力，尚不声称全部实现。"
@@ -2374,9 +2155,6 @@
         "Demo事件前置条件、一次性/重复逻辑正确，不错误重入或重复奖励。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "system.events.implementation"
-      ],
       "verification_ids": [
         "V-SYSTEM"
       ],
@@ -2395,7 +2173,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2416,7 +2193,6 @@
       "evidence_ids": [
         "E-SAVE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "已有基础实现；此项评价完整Demo能力，尚不声称全部实现。"
@@ -2435,9 +2211,6 @@
         "恢复序章所需地图位置、剧情、任务、必要物品与支线状态，能继续主线。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "system.save.implementation"
-      ],
       "verification_ids": [
         "V-SYSTEM"
       ],
@@ -2456,7 +2229,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2477,7 +2249,6 @@
       "evidence_ids": [
         "E-RECORD"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "已有基础实现；此项评价完整Demo能力，尚不声称全部实现。"
@@ -2496,9 +2267,6 @@
         "复读机正确显示Demo任务/物品并更新阶段，移除影响理解的测试数据。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "system.records.implementation"
-      ],
       "verification_ids": [
         "V-SYSTEM"
       ],
@@ -2517,7 +2285,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2538,7 +2305,6 @@
       "evidence_ids": [
         "E-MENU"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "已有基础实现；此项评价完整Demo能力，尚不声称全部实现。"
@@ -2557,9 +2323,6 @@
         "标题开始/继续、菜单返回标题可用；终点明确结束并不进入第一章。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "system.lifecycle.implementation"
-      ],
       "verification_ids": [
         "V-SYSTEM"
       ],
@@ -2578,7 +2341,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2599,7 +2361,6 @@
       "evidence_ids": [
         "E-MINI-PLAY"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "feature_branch",
       "notes": "状态仅描述功能分支成果；未集成时不能作为main已实现计分。"
@@ -2616,7 +2377,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2637,7 +2397,6 @@
       "evidence_ids": [
         "E-MINI-UI"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": "feature_branch",
       "notes": ""
@@ -2659,10 +2418,6 @@
         "E-MINI-UI",
         "E-EXPLORE"
       ],
-      "dependencies": [
-        "system.minigame_play.implementation",
-        "system.minigame_integration.branch"
-      ],
       "verification_ids": [],
       "implementation_location": "main",
       "notes": "本次只记录任务，不执行切换或合并。"
@@ -2679,7 +2434,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2701,9 +2455,6 @@
         "E-MINI-STATE",
         "E-SAVE"
       ],
-      "dependencies": [
-        "system.minigame_integration.main"
-      ],
       "verification_ids": [],
       "implementation_location": "feature_branch",
       "notes": "分支已有写标记，存读档需核对与验收；不保存局内进度。"
@@ -2724,7 +2475,6 @@
       "evidence_ids": [
         "E-MINI-STATE"
       ],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "目前不将通关设为主线前置条件，不自动增加奖励。"
@@ -2741,7 +2491,6 @@
       "assessment": "aggregate",
       "completion_criteria": [],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": ""
@@ -2760,10 +2509,6 @@
         "在集成Demo版本验证成功、失败R重开、暂停继续/放弃、关闭复读机与通关后存读档。"
       ],
       "evidence_ids": [],
-      "dependencies": [
-        "system.minigame_integration.main",
-        "system.minigame_state.state"
-      ],
       "verification_ids": [
         "V-MINI"
       ],
@@ -2784,7 +2529,6 @@
         "开发者综合操作手感、表现一致性和流程质量评分。"
       ],
       "evidence_ids": [],
-      "dependencies": [],
       "verification_ids": [],
       "implementation_location": null,
       "notes": "缺失必要功能回对应基础Todo；已有能力的品质改善放本项备注，不重复计分。"
@@ -3307,7 +3051,7 @@
     "system.minigame_accept": 1
   },
   "evaluation": {
-    "evaluated_at": "2026-10-04T00:30:45-04:00",
+    "evaluated_at": "2026-10-04T15:42:19-04:00",
     "highlights": [
       "现有主线事件与10张地图已纳入完整Demo清单，逐项保留静态实现证据。",
       "对话、探索、事件触发及存读档已有基础实现，完整Demo流程仍需核对与人工验收。",
@@ -3322,6 +3066,10 @@
       {
         "type": "manual_score_update",
         "text": "开发者提供UI 50%、打磨10%；没有改写其他任务状态。"
+      },
+      {
+        "type": "refinement",
+        "text": "按开发者要求移除任务依赖关系；任务范围、状态、权重和评分保持不变。"
       }
     ],
     "dimension_reviews": {

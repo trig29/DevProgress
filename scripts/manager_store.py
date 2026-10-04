@@ -59,6 +59,16 @@ def preserve_number_types(value, template):
 class Conflict(ValueError):
     pass
 
+def migrate_legacy_bundle(bundle):
+    """Restore old local drafts/backups without reintroducing removed task fields."""
+    todo=bundle['todo']
+    if todo.get('schema_version') in {'1.0.0','1.1.0'}:
+        for item in todo['items']:item.pop('dependencies',None)
+        todo['schema_version']='1.2.0'
+    for entry in bundle.get('trash',[]):
+        for item in entry['items']:item.pop('dependencies',None)
+    return bundle
+
 class Store:
     def __init__(self, root):
         self.root=Path(root).resolve()
@@ -133,6 +143,7 @@ class Store:
             bundle=self.bundle()
             bundle.update(todo=read(backup/'todo.json'),config=read(backup/'site.config.json'),content=load_content(backup))
             bundle['trash']=read(backup/'trash.json')
+            migrate_legacy_bundle(bundle)
             bundle['change']={'type':'demo_expansion','reason':'从应用记录恢复旧数据，保留现有历史；范围或规则变化按恢复后的数据记录'}
             bundle['manual_notes']={i:'用户从应用记录恢复旧的手动评分' for i in bundle['todo']['manual_scores']}
             source=bundle['todo']['project']['target_source']
@@ -144,7 +155,7 @@ class Store:
             return self.save({**request,'bundle':bundle})
 
     def normalized(self, bundle):
-        old=self.bundle();new=copy.deepcopy(bundle);todo=preserve_number_types(new['todo'],old['todo']);new['todo']=todo;base=old['todo'];stamp=(read(self.local/'draft.json')['saved_at'] if (self.local/'draft.json').exists() else self.now())
+        old=self.bundle();new=migrate_legacy_bundle(copy.deepcopy(bundle));todo=preserve_number_types(new['todo'],old['todo']);new['todo']=todo;base=old['todo'];stamp=(read(self.local/'draft.json')['saved_at'] if (self.local/'draft.json').exists() else self.now())
         if not isinstance(new.get('change'),dict):raise ValueError('变更类型和原因无效')
         kind=new['change'].get('type');reason=new['change'].get('reason','').strip()
         if kind not in {'status_update','refinement','demo_expansion','future','rule_change','manual_score_update'}:raise ValueError('变更类型无效')

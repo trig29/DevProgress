@@ -1674,6 +1674,1680 @@
       "method": "静态评估 + 开发者提供的验收记录；未运行游戏",
       "generated_at": "2026-10-04T00:51:00-04:00",
       "published_at": "2026-10-04T06:20:59+00:00"
+    },
+    {
+      "schema_version": "1.0.0",
+      "snapshot_id": "d04129b2f35c8876e68d",
+      "project": {
+        "id": "godot-rpg-demo",
+        "title": "北四楼来信 开发进度",
+        "phase": "demo",
+        "phase_label": "Demo / 序章"
+      },
+      "evaluated_at": "2026-10-04T15:42:19-04:00",
+      "scope_version": "demo-v1",
+      "rules_version": "confirmed-v1",
+      "sources": [
+        {
+          "id": "game_main",
+          "kind": "git",
+          "repository": "GodotRPGGameSystem",
+          "ref": "main",
+          "commit": "93912616ecec5e4b839e91ff94301bbfcf1e6dc0",
+          "dirty": false
+        },
+        {
+          "id": "game_minigame",
+          "kind": "git",
+          "repository": "GodotRPGGameSystem",
+          "ref": "origin/feature/mini-game",
+          "commit": "d3cf316dca96b2fd14703abe38bc152ad9b334da",
+          "dirty": false
+        }
+      ],
+      "todo_sha256": "a59b2fc376a4d3e334370826f5550f730034dda49c22403b78098dc608bafcd3",
+      "overall": null,
+      "dimensions": [
+        {
+          "id": "story",
+          "label": "剧情",
+          "score": null,
+          "share": 0.3,
+          "contribution": null,
+          "manual_score": null,
+          "unknown_task_ids": [
+            "story.scope.design",
+            "story.opening.accept",
+            "story.classroom.accept",
+            "story.campus.accept",
+            "story.roof.accept",
+            "story.remainder.content",
+            "story.remainder.accept",
+            "story.side_1.design",
+            "story.side_1.content",
+            "story.side_1.accept",
+            "story.side_2.design",
+            "story.side_2.content",
+            "story.side_2.accept",
+            "story.side_3.design",
+            "story.side_3.content",
+            "story.side_3.accept",
+            "story.npc.accept"
+          ],
+          "missing_reasons": [
+            "17 个任务的目标分支完成度待确认"
+          ],
+          "review": "已有前导、教室、校园推进与天台事件。序章完整覆盖及三条支线开头仍待确认与补齐。",
+          "remaining": [
+            "序章资料与段落确认",
+            "故事起点与前导",
+            "教室开场与必要交互"
+          ]
+        },
+        {
+          "id": "art",
+          "label": "美术与场景",
+          "score": null,
+          "share": 0.25,
+          "contribution": null,
+          "manual_score": 50,
+          "unknown_task_ids": [
+            "art.map_foreword.accept",
+            "art.map_classroom_main.accept",
+            "art.map_courtyard.accept",
+            "art.map_corridor_south_f1.accept",
+            "art.map_corridor_south_f2.accept",
+            "art.map_corridor_north_f1.accept",
+            "art.map_corridor_north_f2.accept",
+            "art.map_corridor_north_f3.accept",
+            "art.map_preroof.accept",
+            "art.map_roof.accept",
+            "art.map_playground.design",
+            "art.map_playground.accept",
+            "art.map_restroom.design",
+            "art.map_restroom.accept",
+            "art.map_building_exterior.design",
+            "art.map_building_exterior.accept",
+            "art.map_library.design",
+            "art.map_library.accept",
+            "art.map_art_gallery.design",
+            "art.map_art_gallery.accept",
+            "art.map_auditorium.design",
+            "art.map_auditorium.accept",
+            "art.characters.scope",
+            "art.characters.accept",
+            "art.performance.accept",
+            "art.audio.accept"
+          ],
+          "missing_reasons": [
+            "26 个任务的目标分支完成度待确认"
+          ],
+          "review": "现有地图、角色动画及演出已有资源和实现；新增六区域、正式素材与视觉验收仍待推进。UI手动评分50%。",
+          "remaining": [
+            "前导场景",
+            "主教室",
+            "庭院／花园"
+          ]
+        },
+        {
+          "id": "system",
+          "label": "系统",
+          "score": null,
+          "share": 0.15,
+          "contribution": null,
+          "manual_score": null,
+          "unknown_task_ids": [
+            "system.dialogue.accept",
+            "system.exploration.accept",
+            "system.events.accept",
+            "system.save.accept",
+            "system.records.accept",
+            "system.lifecycle.accept",
+            "system.minigame_play.implementation",
+            "system.minigame_integration.branch",
+            "system.minigame_state.state",
+            "system.minigame_state.design",
+            "system.minigame_accept.run"
+          ],
+          "missing_reasons": [
+            "11 个任务的目标分支完成度待确认"
+          ],
+          "review": "必要系统已有基础实现；完整流程验收、测试内容替换与小游戏主分支集成仍待完成。",
+          "remaining": [
+            "对话、选项、快进与自动播放",
+            "地图探索与交互",
+            "事件触发与状态变化"
+          ]
+        },
+        {
+          "id": "polish",
+          "label": "打磨成熟度",
+          "score": 10,
+          "share": 0.3,
+          "contribution": 3.0,
+          "manual_score": 10,
+          "unknown_task_ids": [],
+          "missing_reasons": [],
+          "review": "开发者手动评分10%，贡献整体3.0个百分点；成熟度与必要功能完成度分开记录。",
+          "remaining": []
+        }
+      ],
+      "missing_reasons": [
+        "剧情：17 个任务的目标分支完成度待确认",
+        "美术与场景：26 个任务的目标分支完成度待确认",
+        "系统：11 个任务的目标分支完成度待确认"
+      ],
+      "rules": {
+        "approval": "confirmed",
+        "weight_scale": {
+          "small": 1,
+          "medium": 3,
+          "large": 5
+        },
+        "weight_note": "权重是维度内相对单位；大项预算为子项权重之和。拆细保留预算。",
+        "dimension_shares": {
+          "story": 0.3,
+          "art": 0.25,
+          "system": 0.15,
+          "polish": 0.3
+        },
+        "art_ui_share": 0.2,
+        "status_factors": {
+          "not_started": 0.0,
+          "in_progress": 0.4,
+          "implemented_unverified": 0.8,
+          "done": 1.0
+        },
+        "status_labels": {
+          "not_started": "未开始",
+          "in_progress": "进行中",
+          "implemented_unverified": "实现完成待验证",
+          "done": "已完成"
+        },
+        "unknown_policy": "status=null，assessment=pending_confirmation；不当作未开始，不填零，不剔除分母。",
+        "branch_policy": "功能分支状态单独展示；未集成目标分支的实现类任务，在目标进度中视为未知，直到main有证据。",
+        "calculation": "只计demo最末层task；剧情/系统用sum(weight*factor)/sum(weight)。美术=0.8*自动任务加权分+0.2*UI手动分。整体=0.30*剧情+0.25*美术+0.15*系统+0.30*打磨。手动百分数先除100。规则未确认或任何相关值未知时，相关百分比为null；可另算明确标注的范围，不得伪造精确值。",
+        "parent_policy": "group只汇总，不存权重、状态或百分比；父项预算取孩子权重之和。",
+        "done_policy": "已有成果必须保留；行为/视觉/音频完成须有对应用户验收证据。本次无已提供的运行验收，不编造done任务。",
+        "scope_changes": [
+          "refinement：原目标细化，保留父项原权重总和。",
+          "demo_expansion：当前Demo扩大范围，确认后改scope_version并解释百分比变化。",
+          "future：后续版本计划，scope=future，不入Demo分母。"
+        ]
+      },
+      "manual_scores": {
+        "art.ui": {
+          "value": 50,
+          "unit": "percent",
+          "updated_by": "user",
+          "updated_at": "2026-10-04T00:30:45-04:00",
+          "evidence": [
+            "开发者在本次方案确认中提供：UI 50；打磨 10。"
+          ]
+        },
+        "polish.manual": {
+          "value": 10,
+          "unit": "percent",
+          "updated_by": "user",
+          "updated_at": "2026-10-04T00:30:45-04:00",
+          "evidence": [
+            "开发者在本次方案确认中提供：UI 50；打磨 10。"
+          ]
+        }
+      },
+      "groups": [
+        {
+          "id": "story.scope",
+          "title": "序章资料与段落确认",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.scope.design",
+              "title": "确认序章开场、终点与开放探索时机",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "依据剧情资料整理必要段落与边界，确认现有事件的归属。"
+              ],
+              "weight": 3,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.opening",
+          "title": "故事起点与前导",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.opening.content",
+              "title": "文案、事件与状态衔接",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "对照剧情资料补齐该段落对白、必要选项、触发和状态衔接。"
+              ],
+              "weight": 4,
+              "implementation_location": "main"
+            },
+            {
+              "id": "story.opening.accept",
+              "title": "段落人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "正常剧情入口到达并完成该段落，已设计选项结果正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.classroom",
+          "title": "教室开场与必要交互",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 8,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.classroom.content",
+              "title": "文案、事件与状态衔接",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "对照剧情资料补齐该段落对白、必要选项、触发和状态衔接。"
+              ],
+              "weight": 7,
+              "implementation_location": "main"
+            },
+            {
+              "id": "story.classroom.accept",
+              "title": "段落人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "正常剧情入口到达并完成该段落，已设计选项结果正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.campus",
+          "title": "校园推进与去天台",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 10,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.campus.content",
+              "title": "文案、事件与状态衔接",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "对照剧情资料补齐该段落对白、必要选项、触发和状态衔接。"
+              ],
+              "weight": 9,
+              "implementation_location": "main"
+            },
+            {
+              "id": "story.campus.accept",
+              "title": "段落人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "正常剧情入口到达并完成该段落，已设计选项结果正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.roof",
+          "title": "天台段落",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 10,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.roof.content",
+              "title": "文案、事件与状态衔接",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "对照剧情资料补齐该段落对白、必要选项、触发和状态衔接。"
+              ],
+              "weight": 9,
+              "implementation_location": "main"
+            },
+            {
+              "id": "story.roof.accept",
+              "title": "段落人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "正常剧情入口到达并完成该段落，已设计选项结果正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.remainder",
+          "title": "序章其余必要段落与收尾",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 12,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.remainder.content",
+              "title": "补齐资料确定的剩余主线与序章收尾",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "实现现有分组未覆盖的序章必要内容与明确结尾。"
+              ],
+              "weight": 10,
+              "implementation_location": null
+            },
+            {
+              "id": "story.remainder.accept",
+              "title": "完整序章主线人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "从标题开始到序章结束可连贯体验，不进入第一章。"
+              ],
+              "weight": 2,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.side_1",
+          "title": "长线支线1的可体验开头",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 6,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.side_1.design",
+              "title": "角色、主题与开头设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定角色/主题、开头体验范围、触发与结束表现。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "story.side_1.content",
+              "title": "开头文案与事件接入",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "完成可触发的对白/事件及后续线索；只持久化设计要求的状态。"
+              ],
+              "weight": 4,
+              "implementation_location": null
+            },
+            {
+              "id": "story.side_1.accept",
+              "title": "支线开头人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "按设计条件触发并完成开头，重复交互与结束表现正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.side_2",
+          "title": "长线支线2的可体验开头",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 6,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.side_2.design",
+              "title": "角色、主题与开头设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定角色/主题、开头体验范围、触发与结束表现。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "story.side_2.content",
+              "title": "开头文案与事件接入",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "完成可触发的对白/事件及后续线索；只持久化设计要求的状态。"
+              ],
+              "weight": 4,
+              "implementation_location": null
+            },
+            {
+              "id": "story.side_2.accept",
+              "title": "支线开头人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "按设计条件触发并完成开头，重复交互与结束表现正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.side_3",
+          "title": "长线支线3的可体验开头",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 6,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.side_3.design",
+              "title": "角色、主题与开头设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定角色/主题、开头体验范围、触发与结束表现。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "story.side_3.content",
+              "title": "开头文案与事件接入",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "完成可触发的对白/事件及后续线索；只持久化设计要求的状态。"
+              ],
+              "weight": 4,
+              "implementation_location": null
+            },
+            {
+              "id": "story.side_3.accept",
+              "title": "支线开头人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "按设计条件触发并完成开头，重复交互与结束表现正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "story.npc",
+          "title": "探索所需普通NPC对话",
+          "dimension": "story",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "story.npc.content",
+              "title": "按区域或角色组补齐必要对话",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "确认探索所需NPC对话并接入；不要求每个NPC具有独立支线。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "story.npc.accept",
+              "title": "普通NPC交互人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "在允许探索时可触发必要对话，重复交互符合设计。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_foreword",
+          "title": "前导场景",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_foreword.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_foreword.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_classroom_main",
+          "title": "主教室",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_classroom_main.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_classroom_main.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_courtyard",
+          "title": "庭院／花园",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_courtyard.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_courtyard.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_corridor_south_f1",
+          "title": "南楼一层走廊",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_corridor_south_f1.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_corridor_south_f1.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_corridor_south_f2",
+          "title": "南楼二层走廊",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_corridor_south_f2.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_corridor_south_f2.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_corridor_north_f1",
+          "title": "北楼一层走廊",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_corridor_north_f1.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_corridor_north_f1.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_corridor_north_f2",
+          "title": "北楼二层走廊",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_corridor_north_f2.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_corridor_north_f2.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_corridor_north_f3",
+          "title": "北楼三层走廊",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_corridor_north_f3.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_corridor_north_f3.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_preroof",
+          "title": "天台前区域",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_preroof.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_preroof.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_roof",
+          "title": "天台",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_roof.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "正式必要素材、边界/碰撞、出生点、按用途的出入口及镜头/音频配置齐备。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.map_roof.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_playground",
+          "title": "操场",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_playground.design",
+              "title": "布局、连接与必要用途设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定该区域布局、校园连接及剧情用途，不扩展额外楼层或房间。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_playground.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "not_started",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "建立该区域场景与必要素材、碰撞、出生点、连接及表现配置。"
+              ],
+              "weight": 3,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_playground.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_restroom",
+          "title": "厕所",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_restroom.design",
+              "title": "布局、连接与必要用途设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定该区域布局、校园连接及剧情用途，不扩展额外楼层或房间。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_restroom.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "not_started",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "建立该区域场景与必要素材、碰撞、出生点、连接及表现配置。"
+              ],
+              "weight": 3,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_restroom.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_building_exterior",
+          "title": "教学楼外围",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_building_exterior.design",
+              "title": "布局、连接与必要用途设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定该区域布局、校园连接及剧情用途，不扩展额外楼层或房间。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_building_exterior.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "not_started",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "建立该区域场景与必要素材、碰撞、出生点、连接及表现配置。"
+              ],
+              "weight": 3,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_building_exterior.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_library",
+          "title": "图书馆",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_library.design",
+              "title": "布局、连接与必要用途设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定该区域布局、校园连接及剧情用途，不扩展额外楼层或房间。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_library.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "not_started",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "建立该区域场景与必要素材、碰撞、出生点、连接及表现配置。"
+              ],
+              "weight": 3,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_library.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_art_gallery",
+          "title": "艺术馆",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_art_gallery.design",
+              "title": "布局、连接与必要用途设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定该区域布局、校园连接及剧情用途，不扩展额外楼层或房间。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_art_gallery.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "not_started",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "建立该区域场景与必要素材、碰撞、出生点、连接及表现配置。"
+              ],
+              "weight": 3,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_art_gallery.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.map_auditorium",
+          "title": "礼堂",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.map_auditorium.design",
+              "title": "布局、连接与必要用途设计",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "确定该区域布局、校园连接及剧情用途，不扩展额外楼层或房间。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_auditorium.build",
+              "title": "必要地图搭建与素材接入",
+              "status": "not_started",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "建立该区域场景与必要素材、碰撞、出生点、连接及表现配置。"
+              ],
+              "weight": 3,
+              "implementation_location": null
+            },
+            {
+              "id": "art.map_auditorium.accept",
+              "title": "地图画面与探索人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "允许探索时能进入、探索和离开，剧情限制与必要内容可达。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.characters",
+          "title": "主要角色正式表现",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 12,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.characters.scope",
+              "title": "确认Demo必需角色及素材需求",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "根据实际出演确定主要角色，区分正式/占位素材与剧情必需动作。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            },
+            {
+              "id": "art.characters.portraits",
+              "title": "正式立绘制作与接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "必需主要角色正式立绘接入所需对白。"
+              ],
+              "weight": 5,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.characters.motion",
+              "title": "行走、奔跑与必要剧情动画",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "必需角色基础行走/奔跑及剧情必要动画齐备并接入。"
+              ],
+              "weight": 5,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.characters.accept",
+              "title": "角色视觉与动画人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "正式立绘、基础运动与必要动作显示正确并获开发者确认。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.performance",
+          "title": "关键剧情演出",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 6,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.performance.content",
+              "title": "必要镜头、动作与转场接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "对照已确认剧情补齐必要演出，不自动新增CG或额外动画。"
+              ],
+              "weight": 5,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.performance.accept",
+              "title": "关键演出人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "关键剧情镜头、动作、转场自然，结束后视角正确。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "art.audio",
+          "title": "必要BGM与音效",
+          "dimension": "art",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 6,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "art.audio.content",
+              "title": "必要音频资源与播放切换",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "必要BGM/音效齐备；确有需求的环境音正确播放、切换和停止。"
+              ],
+              "weight": 5,
+              "implementation_location": "main"
+            },
+            {
+              "id": "art.audio.accept",
+              "title": "听觉表现人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "标题、探索与关键事件音频符合设计，无不应残留的声音。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.dialogue",
+          "title": "对话、选项、快进与自动播放",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 6,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "system.dialogue.implementation",
+              "title": "已有能力核对与Demo缺口补齐",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "已设计的对白、选项、快进与自动播放正确工作，结束/中止恢复输入与镜头。"
+              ],
+              "weight": 5,
+              "implementation_location": "main"
+            },
+            {
+              "id": "system.dialogue.accept",
+              "title": "系统人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "已设计的对白、选项、快进与自动播放正确工作，结束/中止恢复输入与镜头。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.exploration",
+          "title": "地图探索与交互",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "system.exploration.implementation",
+              "title": "已有能力核对与Demo缺口补齐",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "行走、奔跑、交互和切换可用，按已确认剧情条件开放/限制探索。"
+              ],
+              "weight": 4,
+              "implementation_location": "main"
+            },
+            {
+              "id": "system.exploration.accept",
+              "title": "系统人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "行走、奔跑、交互和切换可用，按已确认剧情条件开放/限制探索。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.events",
+          "title": "事件触发与状态变化",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "system.events.implementation",
+              "title": "已有能力核对与Demo缺口补齐",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "Demo事件前置条件、一次性/重复逻辑正确，不错误重入或重复奖励。"
+              ],
+              "weight": 4,
+              "implementation_location": "main"
+            },
+            {
+              "id": "system.events.accept",
+              "title": "系统人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "Demo事件前置条件、一次性/重复逻辑正确，不错误重入或重复奖励。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.save",
+          "title": "存档与读档",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 7,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "system.save.implementation",
+              "title": "已有能力核对与Demo缺口补齐",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "恢复序章所需地图位置、剧情、任务、必要物品与支线状态，能继续主线。"
+              ],
+              "weight": 6,
+              "implementation_location": "main"
+            },
+            {
+              "id": "system.save.accept",
+              "title": "系统人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "恢复序章所需地图位置、剧情、任务、必要物品与支线状态，能继续主线。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.records",
+          "title": "任务与必要物品记录",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 4,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "system.records.implementation",
+              "title": "已有能力核对与Demo缺口补齐",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "复读机正确显示Demo任务/物品并更新阶段，移除影响理解的测试数据。"
+              ],
+              "weight": 3,
+              "implementation_location": "main"
+            },
+            {
+              "id": "system.records.accept",
+              "title": "系统人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "复读机正确显示Demo任务/物品并更新阶段，移除影响理解的测试数据。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.lifecycle",
+          "title": "开始、继续、返回标题与Demo结束",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 5,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "system.lifecycle.implementation",
+              "title": "已有能力核对与Demo缺口补齐",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "标题开始/继续、菜单返回标题可用；终点明确结束并不进入第一章。"
+              ],
+              "weight": 4,
+              "implementation_location": "main"
+            },
+            {
+              "id": "system.lifecycle.accept",
+              "title": "系统人工验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "标题开始/继续、菜单返回标题可用；终点明确结束并不进入第一章。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.minigame_play",
+          "title": "环形拼图：基础玩法与关卡",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "implemented_unverified",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": true,
+          "children": [
+            {
+              "id": "system.minigame_play.implementation",
+              "title": "基础玩法与八碎片关卡",
+              "status": "implemented_unverified",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "自转/公转、拼接、默认三次错误机会、成功/失败与R重开实现齐备。"
+              ],
+              "weight": 3,
+              "implementation_location": "feature_branch"
+            }
+          ]
+        },
+        {
+          "id": "system.minigame_integration",
+          "title": "环形拼图：复读机集成与输入恢复",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": true,
+          "children": [
+            {
+              "id": "system.minigame_integration.branch",
+              "title": "分支入口、说明与暂停退出",
+              "status": "implemented_unverified",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "分支已实现说明、开始、返回暂停、继续/放弃和关闭复读机取消。"
+              ],
+              "weight": 1,
+              "implementation_location": "feature_branch"
+            },
+            {
+              "id": "system.minigame_integration.main",
+              "title": "集成Demo主分支并核对输入恢复",
+              "status": "not_started",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "在Demo目标分支接入小游戏，离开/关闭后释放小游戏与复读机控制。"
+              ],
+              "weight": 2,
+              "implementation_location": "main"
+            }
+          ]
+        },
+        {
+          "id": "system.minigame_state",
+          "title": "环形拼图：通关状态与存档",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "in_progress",
+          "score": null,
+          "weight": 3,
+          "has_feature_branch": true,
+          "children": [
+            {
+              "id": "system.minigame_state.state",
+              "title": "通关标记与正常存读档接入",
+              "status": "in_progress",
+              "assessment": "assessed",
+              "completion_criteria": [
+                "通关设置 ring_puzzle_completed、返回主界面；标记通过正常存读档保留。"
+              ],
+              "weight": 2,
+              "implementation_location": "feature_branch"
+            },
+            {
+              "id": "system.minigame_state.design",
+              "title": "确认是否需要剧情或奖励关联",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "开发者确定无需关联或确定关联设计；只有确定要求才在本组原权重内细化。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        },
+        {
+          "id": "system.minigame_accept",
+          "title": "环形拼图：人工运行验收",
+          "dimension": "system",
+          "scope": "demo",
+          "status": "pending_confirmation",
+          "score": null,
+          "weight": 1,
+          "has_feature_branch": false,
+          "children": [
+            {
+              "id": "system.minigame_accept.run",
+              "title": "成功、失败、退出与存读档验收",
+              "status": null,
+              "assessment": "pending_confirmation",
+              "completion_criteria": [
+                "在集成Demo版本验证成功、失败R重开、暂停继续/放弃、关闭复读机与通关后存读档。"
+              ],
+              "weight": 1,
+              "implementation_location": null
+            }
+          ]
+        }
+      ],
+      "task_counts": {
+        "total": 86,
+        "remaining": 86,
+        "statuses": {
+          "pending_confirmation": 51,
+          "in_progress": 26,
+          "not_started": 7,
+          "implemented_unverified": 2
+        }
+      },
+      "update": {
+        "highlights": [
+          "现有主线事件与10张地图已纳入完整Demo清单，逐项保留静态实现证据。",
+          "对话、探索、事件触发及存读档已有基础实现，完整Demo流程仍需核对与人工验收。",
+          "环形拼图功能分支已有基础玩法，主分支集成与运行验收仍待完成。",
+          "确认评分口径，并记录UI完成度50%、打磨成熟度10%。"
+        ],
+        "change_reasons": [
+          {
+            "type": "rule_change",
+            "text": "首次确认维度权重、UI比例、状态档位与任务相对权重。"
+          },
+          {
+            "type": "manual_score_update",
+            "text": "开发者提供UI 50%、打磨10%；没有改写其他任务状态。"
+          },
+          {
+            "type": "refinement",
+            "text": "按开发者要求移除任务依赖关系；任务范围、状态、权重和评分保持不变。"
+          }
+        ],
+        "delta": null,
+        "comparable": true
+      },
+      "method": "静态评估 + 开发者提供的验收记录；未运行游戏",
+      "generated_at": "2026-10-04T15:43:56-04:00",
+      "published_at": null
     }
   ]
 }

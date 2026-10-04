@@ -6,7 +6,7 @@
       "type": "string"
     },
     "schema_version": {
-      "const": "1.1.0"
+      "const": "1.2.0"
     },
     "project": {
       "type": "object",
@@ -478,12 +478,6 @@
             "type": "string"
           }
         },
-        "dependencies": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "verification_ids": {
           "type": "array",
           "items": {
@@ -513,7 +507,6 @@
         "assessment",
         "completion_criteria",
         "evidence_ids",
-        "dependencies",
         "verification_ids",
         "implementation_location",
         "notes"

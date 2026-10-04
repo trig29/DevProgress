@@ -95,9 +95,9 @@ class ProgressTests(unittest.TestCase):
 
     def test_references_budget_and_done_proof(self):
         data=fixture();leaf=next(i for i in data['items'] if i['kind']=='task')
-        leaf['weight']+=1;leaf['dependencies']=['missing'];leaf.update(status='done',assessment='assessed')
+        leaf['weight']+=1;leaf['evidence_ids']=['missing'];leaf.update(status='done',assessment='assessed')
         errors=' '.join(validate(data))
-        self.assertIn('budget',errors);self.assertIn('dependency',errors);self.assertIn('verification',errors)
+        self.assertIn('budget',errors);self.assertIn('evidence reference',errors);self.assertIn('verification',errors)
 
     def test_scope_rule_changes_and_regression_deltas(self):
         config=read(ROOT/'site.config.json');data=all_completed()
@@ -169,7 +169,7 @@ class ExportTests(unittest.TestCase):
 
     def test_invalid_data_leaves_previous_export_and_history_intact(self):
         build(self.project);original=(self.project/'history'/'snapshots.json').read_bytes();output=(self.project/'site'/'data'/'current.json').read_bytes()
-        data=read(self.project/'todo.json');data['items'][1]['dependencies']=['missing']
+        data=read(self.project/'todo.json');data['items'][1]['parent_id']='missing'
         (self.project/'todo.json').write_text(json.dumps(data))
         with self.assertRaises(ValueError):build(self.project)
         self.assertEqual((self.project/'history'/'snapshots.json').read_bytes(),original)

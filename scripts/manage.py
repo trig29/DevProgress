@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Local DevProgress manager. Python standard library only."""
 import argparse
+import errno
+import hashlib
 import hmac
 import json
 import mimetypes
@@ -11,11 +13,24 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
+from urllib.request import urlopen
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 sys.path.insert(0,str(ROOT/'scripts'))
 from manager_store import Store, Conflict
+
+
+def service_identity(root):
+    return {'service':'devprogress-manager','project':hashlib.sha256(str(Path(root).resolve()).encode()).hexdigest()}
+
+
+def existing_manager(root, port):
+    try:
+        with urlopen(f'http://127.0.0.1:{port}/api/health',timeout=2) as response:
+            return json.loads(response.read(4096))==service_identity(root)
+    except (OSError,ValueError):
+        return False
 
 
 def make_handler(store, token, port):
@@ -43,7 +58,9 @@ def make_handler(store, token, port):
         def do_GET(self):
             if self.headers.get('Host')!=f'127.0.0.1:{port}':self.error(403,'访问地址无效');return
             path=urlsplit(self.path).path
-            if path=='/':
+            if path=='/api/health':
+                self.send(200,service_identity(store.root))
+            elif path=='/':
                 html=(ROOT/'manager/index.html').read_text(encoding='utf-8').replace('__SESSION_TOKEN__',token)
                 self.send(200,html.encode(),'text/html; charset=utf-8')
             elif path.startswith('/manager/'):
@@ -85,7 +102,13 @@ def main():
         from build_site import build
         build(store.root)
     try:server=ThreadingHTTPServer(('127.0.0.1',args.port),make_handler(store,secrets.token_urlsafe(32),args.port))
-    except OSError as exc:parser.exit(1,f'无法启动（端口可能已占用）：{exc}\n')
+    except OSError as exc:
+        if exc.errno==errno.EADDRINUSE and existing_manager(store.root,args.port):
+            url=f'http://127.0.0.1:{args.port}/'
+            print(f'管理工具已在运行：{url}\n已复用现有服务，无需重复启动。',flush=True)
+            if not args.no_open:webbrowser.open(url)
+            return 2
+        parser.exit(1,f'无法启动：端口 {args.port} 已被其他服务或旧版管理工具占用。\n可使用 python3 scripts/manage.py --port {args.port+1} 启动。\n原始错误：{exc}\n')
     url=f'http://127.0.0.1:{args.port}/'
     print(f'本地管理工具：{url}\n停止服务：在此终端按 Control+C。不会提交、推送或发布。',flush=True)
     if not args.no_open:threading.Timer(.4,lambda:webbrowser.open(url)).start()
@@ -93,4 +116,4 @@ def main():
     except KeyboardInterrupt:pass
     finally:server.server_close()
 
-if __name__=='__main__':main()
+if __name__=='__main__':sys.exit(main())

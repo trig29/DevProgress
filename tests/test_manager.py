@@ -35,12 +35,13 @@ class ManagerTests(unittest.TestCase):
         self.store.apply(self.request);self.assertEqual(history,read(self.root/'history/snapshots.json'));self.assertEqual(read(self.root/'site/data/content.json')['pages']['todos']['intro'],'新的说明')
         self.assertFalse((self.root/'site/manager').exists());self.assertFalse((self.root/'site/.local-manager').exists())
     def test_manual_unknown_zero_and_restore_history(self):
+        initial_count=len(read(self.root/'history/snapshots.json')['snapshots'])
         score=self.request['bundle']['todo']['manual_scores']['art.ui'];score['value']=0;self.request['bundle']['manual_notes']['art.ui']='用户实际评分为零';self.save()
         first=self.store.apply(self.request);self.assertTrue(first['record']['new_snapshot']);self.assertEqual(read(self.root/'todo.json')['manual_scores']['art.ui']['value'],0)
         state=self.store.state();req={'base_revision':state['base_revision'],'draft_revision':0,'id':first['record']['id']}
         draft=self.store.restore(req);req.update(bundle=draft['bundle'],draft_revision=draft['draft_revision']);self.store.apply(req)
         self.assertEqual(read(self.root/'todo.json')['manual_scores']['art.ui']['value'],50)
-        self.assertEqual(len(read(self.root/'history/snapshots.json')['snapshots']),3)
+        self.assertEqual(len(read(self.root/'history/snapshots.json')['snapshots']),initial_count+2)
     def test_missing_manual_source_and_done_evidence(self):
         self.request['bundle']['todo']['manual_scores']['art.ui']['value']=None
         with self.assertRaisesRegex(ValueError,'来源说明'):self.store.normalized(self.request['bundle'])
@@ -59,7 +60,6 @@ class ManagerTests(unittest.TestCase):
         b['todo']['items']=[g for g in b['todo']['items'] if g['id']!=old_parent];del b['todo']['group_budgets'][old_parent]
         for section in ('candidate_notes','pending_decisions'):
             for r in b['todo'][section]:r['related_ids']=[i for i in r['related_ids'] if i!=old_parent]
-        for t in b['todo']['items']:t['dependencies']=[d for d in t['dependencies'] if d!=old_parent]
         b['change']={'type':'demo_expansion','reason':'移动一个子项并显式移除空组'}
         result=self.store.normalized(b);self.assertEqual(next(t for t in result['todo']['items'] if t['id']==moving['id'])['parent_id'],parent['id'])
 
@@ -67,11 +67,18 @@ class ManagerTests(unittest.TestCase):
         t=self.task();t.update(status='done',implementation_location='feature_branch');self.request['bundle']['verifications'][t['id']]={'note':'功能分支人工验收通过','location':'feature_branch','source':'game_minigame'}
         value=self.store.normalized(self.request['bundle']);from progress import task_score
         task=next(x for x in value['todo']['items'] if x['id']==t['id']);self.assertIsNone(task_score(task,value['todo']['rules']))
-    def test_bad_budget_and_cycle(self):
+    def test_legacy_draft_removes_dependencies(self):
+        b=self.request['bundle'];b['todo']['schema_version']='1.1.0'
+        for t in b['todo']['items']:t['dependencies']=['old-task']
+        self.task()['title']='保留草稿修改'
+        result=self.store.normalized(b)
+        self.assertEqual(result['todo']['schema_version'],'1.2.0')
+        self.assertFalse(any('dependencies' in t for t in result['todo']['items']))
+        self.assertEqual(next(t for t in result['todo']['items'] if t['kind']=='task')['title'],'保留草稿修改')
+
+    def test_bad_budget(self):
         self.task()['weight']+=1;self.request['bundle']['change']={'type':'refinement','reason':'调整子项'}
         with self.assertRaisesRegex(ValueError,'budget'):self.store.normalized(self.request['bundle'])
-        self.request['bundle']=self.store.bundle();tasks=[t for t in self.request['bundle']['todo']['items'] if t['kind']=='task'];tasks[0]['dependencies']=[tasks[1]['id']];tasks[1]['dependencies']=[tasks[0]['id']]
-        with self.assertRaisesRegex(ValueError,'cycle'):self.store.normalized(self.request['bundle'])
     def test_rule_versions_and_ranges(self):
         b=self.request['bundle'];b['todo']['rules']['art_ui_share']=.3;b['change']={'type':'rule_change','reason':'调整 UI 比例'};self.save()
         p=self.store.preview(self.request);a=self.store.apply(self.request);self.assertEqual(p['snapshot_id'],a['record']['snapshot_id']);self.assertNotEqual(read(self.root/'todo.json')['snapshot']['rules_version'],'confirmed-v1')
@@ -89,13 +96,11 @@ class ManagerTests(unittest.TestCase):
     def test_duplicate_apply_no_new_snapshot(self):
         self.task()['title']='有效改名';self.save();self.store.apply(self.request);n=len(read(self.root/'history/snapshots.json')['snapshots'])
         s=self.store.state();req={'base_revision':s['base_revision'],'draft_revision':0,'bundle':s['official']};self.assertFalse(self.store.apply(req)['record']['new_snapshot']);self.assertEqual(len(read(self.root/'history/snapshots.json')['snapshots']),n)
-    def test_deleted_dependency_rejected_and_restore(self):
+    def test_deleted_related_reference_rejected(self):
         b=self.request['bundle'];todo=b['todo'];group=next(t for t in todo['items'] if t['kind']=='group');ids={group['id']}|{t['id'] for t in todo['items'] if t['parent_id']==group['id']};gone=[t for t in todo['items'] if t['id'] in ids]
         b['trash']=[{'id':'trash.test','items':gone,'budgets':{group['id']:todo['group_budgets'][group['id']]}}];todo['items']=[t for t in todo['items'] if t['id'] not in ids];del todo['group_budgets'][group['id']];b['change']={'type':'demo_expansion','reason':'移除范围内目标'}
-        remaining=next(t for t in todo['items'] if t['kind']=='task');remaining['dependencies']=[gone[-1]['id']]
-        with self.assertRaisesRegex(ValueError,'dependency'):self.store.normalized(b)
-        remaining['dependencies']=[]
-        for t in todo['items']:t['dependencies']=[d for d in t['dependencies'] if d not in ids]
+        todo['pending_decisions'][0]['related_ids']=[gone[-1]['id']]
+        with self.assertRaisesRegex(ValueError,'related ID'):self.store.normalized(b)
         for k in ('candidate_notes','pending_decisions'):
             for r in todo[k]:r['related_ids']=[i for i in r['related_ids'] if i not in ids]
         value=self.store.normalized(b);self.assertNotEqual(value['todo']['snapshot']['scope_version'],'demo-v1')
@@ -116,6 +121,23 @@ class ManagerTests(unittest.TestCase):
 
 
 class SessionTests(unittest.TestCase):
+    def test_existing_service_matches_project_only(self):
+        from manage import make_handler, existing_manager
+        from http.server import ThreadingHTTPServer
+        from types import SimpleNamespace
+        import threading
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            server=ThreadingHTTPServer(('127.0.0.1',0),make_handler(SimpleNamespace(root=root),'secret',0))
+            port=server.server_port
+            server.RequestHandlerClass=make_handler(SimpleNamespace(root=root),'secret',port)
+            thread=threading.Thread(target=server.serve_forever);thread.start()
+            try:
+                self.assertTrue(existing_manager(root,port))
+                self.assertFalse(existing_manager(root/'other',port))
+            finally:
+                server.shutdown();server.server_close();thread.join()
+
     def test_origin_session_and_host_guards(self):
         from manage import make_handler
         Handler=make_handler(None,'session-secret',4174)
