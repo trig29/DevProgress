@@ -1,0 +1,689 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/snapshot"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "snapshots"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Progress evaluation history v1",
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "snapshot_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{20}$"
+        },
+        "project": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "phase": {
+              "const": "demo"
+            },
+            "phase_label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "phase",
+            "phase_label"
+          ]
+        },
+        "evaluated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "scope_version": {
+          "type": "string"
+        },
+        "rules_version": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"
+              },
+              "kind": {
+                "enum": [
+                  "git",
+                  "document"
+                ]
+              },
+              "path": {
+                "type": "string"
+              },
+              "repository": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "commit": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "dirty": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "kind"
+            ]
+          }
+        },
+        "todo_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "overall": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "score": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
+              },
+              "share": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "contribution": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
+              },
+              "manual_score": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
+              },
+              "unknown_task_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "missing_reasons": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "review": {
+                "type": "string"
+              },
+              "remaining": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "id",
+              "label",
+              "score",
+              "share",
+              "contribution",
+              "manual_score",
+              "unknown_task_ids",
+              "missing_reasons",
+              "review",
+              "remaining"
+            ]
+          }
+        },
+        "missing_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "approval": {
+              "enum": [
+                "draft",
+                "confirmed"
+              ]
+            },
+            "weight_scale": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "small": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "medium": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "large": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "small",
+                "medium",
+                "large"
+              ]
+            },
+            "weight_note": {
+              "type": "string"
+            },
+            "dimension_shares": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "story": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "art": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "system": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "polish": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "story",
+                "art",
+                "system",
+                "polish"
+              ]
+            },
+            "art_ui_share": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "exclusiveMaximum": 1
+            },
+            "status_factors": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "not_started": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "in_progress": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "implemented_unverified": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "done": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "not_started",
+                "in_progress",
+                "implemented_unverified",
+                "done"
+              ]
+            },
+            "status_labels": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "not_started": {
+                  "type": "string"
+                },
+                "in_progress": {
+                  "type": "string"
+                },
+                "implemented_unverified": {
+                  "type": "string"
+                },
+                "done": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "not_started",
+                "in_progress",
+                "implemented_unverified",
+                "done"
+              ]
+            },
+            "unknown_policy": {
+              "type": "string"
+            },
+            "branch_policy": {
+              "type": "string"
+            },
+            "calculation": {
+              "type": "string"
+            },
+            "parent_policy": {
+              "type": "string"
+            },
+            "done_policy": {
+              "type": "string"
+            },
+            "scope_changes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "approval",
+            "weight_scale",
+            "weight_note",
+            "dimension_shares",
+            "art_ui_share",
+            "status_factors",
+            "status_labels",
+            "unknown_policy",
+            "branch_policy",
+            "calculation",
+            "parent_policy",
+            "done_policy",
+            "scope_changes"
+          ]
+        },
+        "manual_scores": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "art.ui": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "value": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "unit": {
+                  "const": "percent"
+                },
+                "updated_by": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "updated_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "value",
+                "unit",
+                "updated_by",
+                "updated_at",
+                "evidence"
+              ]
+            },
+            "polish.manual": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "value": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "unit": {
+                  "const": "percent"
+                },
+                "updated_by": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "updated_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "value",
+                "unit",
+                "updated_by",
+                "updated_at",
+                "evidence"
+              ]
+            }
+          },
+          "required": [
+            "art.ui",
+            "polish.manual"
+          ]
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "dimension": {
+                "type": "string"
+              },
+              "scope": {
+                "enum": [
+                  "demo",
+                  "future"
+                ]
+              },
+              "status": {
+                "type": "string"
+              },
+              "score": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
+              },
+              "weight": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "has_feature_branch": {
+                "type": "boolean"
+              },
+              "children": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "not_started",
+                        "in_progress",
+                        "implemented_unverified",
+                        "done",
+                        null
+                      ]
+                    },
+                    "assessment": {
+                      "type": "string"
+                    },
+                    "completion_criteria": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "weight": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "implementation_location": {
+                      "enum": [
+                        "main",
+                        "feature_branch",
+                        null
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "title",
+                    "status",
+                    "assessment",
+                    "completion_criteria",
+                    "weight",
+                    "implementation_location"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "dimension",
+              "scope",
+              "status",
+              "score",
+              "weight",
+              "has_feature_branch",
+              "children"
+            ]
+          }
+        },
+        "task_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "remaining": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "statuses": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "required": [
+            "total",
+            "remaining",
+            "statuses"
+          ]
+        },
+        "update": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "highlights": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "change_reasons": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "initial_baseline",
+                      "implementation",
+                      "regression",
+                      "verification",
+                      "demo_expansion",
+                      "rule_change",
+                      "manual_score_update",
+                      "refinement"
+                    ]
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "text"
+                ]
+              }
+            },
+            "delta": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "comparable": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "highlights",
+            "change_reasons",
+            "delta",
+            "comparable"
+          ]
+        },
+        "method": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "snapshot_id",
+        "project",
+        "evaluated_at",
+        "generated_at",
+        "published_at",
+        "scope_version",
+        "rules_version",
+        "sources",
+        "todo_sha256",
+        "overall",
+        "dimensions",
+        "missing_reasons",
+        "rules",
+        "manual_scores",
+        "groups",
+        "task_counts",
+        "update",
+        "method"
+      ],
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Progress evaluation snapshot v1"
+    }
+  }
+}

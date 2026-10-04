@@ -1,0 +1,12 @@
+{
+  "title": "北四楼来信 开发进度",
+  "repository_name": "DevProgress",
+  "phase_label": "Demo / 序章",
+  "timezone": "America/New_York",
+  "publication": {
+    "enabled": false,
+    "repository": null,
+    "url": null,
+    "daily_updates": "publish_after_first_authorized_deployment"
+  }
+}

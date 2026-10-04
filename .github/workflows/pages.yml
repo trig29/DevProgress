@@ -1,0 +1,53 @@
+name: Publish development progress
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Require explicit publication configuration
+        run: |
+          python3 - <<'PY'
+          import json, os
+          config = json.load(open('site.config.json'))['publication']
+          if not config['enabled'] or config['repository'] != os.environ['GITHUB_REPOSITORY'] or not config['url']:
+              raise SystemExit('First publication must be explicitly configured and authorized.')
+          PY
+      - name: Check data and generator
+        run: |
+          python3 validate_todo.py
+          python3 -m unittest discover -s tests -v
+          python3 scripts/build_site.py
+      - uses: actions/configure-pages@v5
+        id: pages
+      - name: Timestamp the deployment artifact
+        run: python3 scripts/stamp_deployment.py --url "$PAGES_URL"
+        env:
+          PAGES_URL: ${{ steps.pages.outputs.base_url }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

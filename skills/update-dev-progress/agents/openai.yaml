@@ -1,0 +1,6 @@
+interface:
+  display_name: "更新北四楼来信开发进度"
+  short_description: "静态核对游戏提交，维护 Todo、评分证据与开发进度网站，保留历史和人工验收。"
+  default_prompt: "使用 $update-dev-progress 更新北四楼来信的 Demo 开发进度。"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+site/
+config.local.json
+.preview/
+剧情/
+story-private/
