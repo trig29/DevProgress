@@ -24,7 +24,7 @@
       "additionalProperties": false,
       "properties": {
         "schema_version": {
-          "const": "1.0.0"
+          "const": "1.1.0"
         },
         "snapshot_id": {
           "type": "string",
@@ -187,6 +187,14 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "ui_score": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100
               }
             },
             "required": [
@@ -199,7 +207,8 @@
               "unknown_task_ids",
               "missing_reasons",
               "review",
-              "remaining"
+              "remaining",
+              "ui_score"
             ]
           }
         },
@@ -358,6 +367,17 @@
               "items": {
                 "type": "string"
               }
+            },
+            "ui_group_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "feature_branch_scoring": {
+              "const": "status"
             }
           },
           "required": [
@@ -373,55 +393,15 @@
             "calculation",
             "parent_policy",
             "done_policy",
-            "scope_changes"
+            "scope_changes",
+            "ui_group_ids",
+            "feature_branch_scoring"
           ]
         },
         "manual_scores": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "art.ui": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "value": {
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "minimum": 0,
-                  "maximum": 100
-                },
-                "unit": {
-                  "const": "percent"
-                },
-                "updated_by": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "updated_at": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                },
-                "evidence": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "value",
-                "unit",
-                "updated_by",
-                "updated_at",
-                "evidence"
-              ]
-            },
             "polish.manual": {
               "type": "object",
               "additionalProperties": false,
@@ -466,7 +446,6 @@
             }
           },
           "required": [
-            "art.ui",
             "polish.manual"
           ]
         },

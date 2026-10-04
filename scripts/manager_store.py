@@ -62,9 +62,14 @@ class Conflict(ValueError):
 def migrate_legacy_bundle(bundle):
     """Restore old local drafts/backups without reintroducing removed task fields."""
     todo=bundle['todo']
-    if todo.get('schema_version') in {'1.0.0','1.1.0'}:
+    if todo.get('schema_version') in {'1.0.0','1.1.0','1.2.0'}:
         for item in todo['items']:item.pop('dependencies',None)
-        todo['schema_version']='1.2.0'
+        todo['items']=[item for item in todo['items'] if item['id']!='art.ui']
+        todo['manual_scores'].pop('art.ui',None)
+        todo['rules'].setdefault('ui_group_ids',[])
+        todo['rules']['feature_branch_scoring']='status'
+        todo['schema_version']='1.3.0'
+        bundle.get('manual_notes',{}).pop('art.ui',None)
     for entry in bundle.get('trash',[]):
         for item in entry['items']:item.pop('dependencies',None)
     return bundle
@@ -144,6 +149,7 @@ class Store:
             bundle.update(todo=read(backup/'todo.json'),config=read(backup/'site.config.json'),content=load_content(backup))
             bundle['trash']=read(backup/'trash.json')
             migrate_legacy_bundle(bundle)
+            bundle['todo']['snapshot']=copy.deepcopy(self.bundle()['todo']['snapshot'])
             bundle['change']={'type':'demo_expansion','reason':'从应用记录恢复旧数据，保留现有历史；范围或规则变化按恢复后的数据记录'}
             bundle['manual_notes']={i:'用户从应用记录恢复旧的手动评分' for i in bundle['todo']['manual_scores']}
             source=bundle['todo']['project']['target_source']
@@ -157,6 +163,7 @@ class Store:
     def normalized(self, bundle):
         old=self.bundle();new=migrate_legacy_bundle(copy.deepcopy(bundle));todo=preserve_number_types(new['todo'],old['todo']);new['todo']=todo;base=old['todo'];stamp=(read(self.local/'draft.json')['saved_at'] if (self.local/'draft.json').exists() else self.now())
         if not isinstance(new.get('change'),dict):raise ValueError('变更类型和原因无效')
+        if not todo['rules'].get('ui_group_ids'):raise ValueError('请选择有效的 UI 任务大项；旧手动 UI 分数不再用于计算')
         kind=new['change'].get('type');reason=new['change'].get('reason','').strip()
         if kind not in {'status_update','refinement','demo_expansion','future','rule_change','manual_score_update'}:raise ValueError('变更类型无效')
         for key in ('sources','project','dimensions','schema_version','$schema'):
@@ -170,12 +177,27 @@ class Store:
         if any(not isinstance(new['config'][k],str) or not new['config'][k].strip() for k in ('title','phase_label')):raise ValueError('网站名称与阶段不能为空')
         validate_content(new['content'])
         old_items={t['id']:t for t in base['items']};items={t['id']:t for t in todo['items']}
-        if set(todo['manual_scores'])!=set(base['manual_scores']):raise ValueError('UI 与打磨评分项目不可新增或删除')
+        if set(todo['manual_scores'])!=set(base['manual_scores']):raise ValueError('打磨手动评分项目不可新增或删除')
         if any(items.get(i,{}).get('kind')!='manual' for i,t in old_items.items() if t['kind']=='manual'):raise ValueError('手动评分项目不可删除或转为普通任务')
         removed=set(old_items)-set(items)
         archived={t['id'] for entry in new['trash'] for t in entry['items']}
         if not removed<=archived:raise ValueError('删除任务必须进入回收站')
         if set(items)&archived:raise ValueError('恢复后必须移出回收站，不能重复使用 ID')
+        # Auxiliary notes remain useful after a task is deleted. Archive only
+        # their removed links, so deletion and later recovery need no manual repair.
+        for section in ('candidate_notes','pending_decisions'):
+            for record in todo[section]:
+                links=[i for i in record['related_ids'] if i in removed]
+                if links:
+                    for entry in new['trash']:
+                        entry_ids={t['id'] for t in entry['items']}
+                        related=[i for i in links if i in entry_ids]
+                        if related:
+                            saved=entry.setdefault('related_references',[])
+                            existing=next((r for r in saved if r['section']==section and r['id']==record['id']),None)
+                            if existing:existing['related_ids']=list(dict.fromkeys(existing['related_ids']+related))
+                            else:saved.append({'section':section,'id':record['id'],'related_ids':related})
+                    record['related_ids']=[i for i in record['related_ids'] if i not in removed]
         for i,item in items.items():
             if i in old_items and item['kind']!=old_items[i]['kind']:raise ValueError('已有任务类型不可更改')
             if item['kind']=='task':

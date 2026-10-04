@@ -22,7 +22,7 @@ class ManagerTests(unittest.TestCase):
     def tearDown(self):self.tmp.cleanup()
     def save(self):
         saved=self.store.save(self.request);self.request['draft_revision']=saved['draft_revision'];return saved
-    def task(self):return next(t for t in self.request['bundle']['todo']['items'] if t['kind']=='task')
+    def task(self):return next(t for t in self.request['bundle']['todo']['items'] if t['kind']=='task' and t['status']!='done')
     def test_draft_persists_and_conflicts(self):
         before=(self.root/'todo.json').read_bytes();self.task()['title']='草稿名称';self.save()
         self.assertEqual(before,(self.root/'todo.json').read_bytes());self.assertEqual(Store(self.root).state()['draft']['bundle']['todo']['items'],self.request['bundle']['todo']['items'])
@@ -36,52 +36,68 @@ class ManagerTests(unittest.TestCase):
         self.assertFalse((self.root/'site/manager').exists());self.assertFalse((self.root/'site/.local-manager').exists())
     def test_manual_unknown_zero_and_restore_history(self):
         initial_count=len(read(self.root/'history/snapshots.json')['snapshots'])
-        score=self.request['bundle']['todo']['manual_scores']['art.ui'];score['value']=0;self.request['bundle']['manual_notes']['art.ui']='用户实际评分为零';self.save()
-        first=self.store.apply(self.request);self.assertTrue(first['record']['new_snapshot']);self.assertEqual(read(self.root/'todo.json')['manual_scores']['art.ui']['value'],0)
+        score=self.request['bundle']['todo']['manual_scores']['polish.manual'];score['value']=0;self.request['bundle']['manual_notes']['polish.manual']='用户实际评分为零';self.save()
+        first=self.store.apply(self.request);self.assertTrue(first['record']['new_snapshot']);self.assertEqual(read(self.root/'todo.json')['manual_scores']['polish.manual']['value'],0)
         state=self.store.state();req={'base_revision':state['base_revision'],'draft_revision':0,'id':first['record']['id']}
         draft=self.store.restore(req);req.update(bundle=draft['bundle'],draft_revision=draft['draft_revision']);self.store.apply(req)
-        self.assertEqual(read(self.root/'todo.json')['manual_scores']['art.ui']['value'],50)
+        self.assertEqual(read(self.root/'todo.json')['manual_scores']['polish.manual']['value'],10)
         self.assertEqual(len(read(self.root/'history/snapshots.json')['snapshots']),initial_count+2)
     def test_missing_manual_source_and_done_evidence(self):
-        self.request['bundle']['todo']['manual_scores']['art.ui']['value']=None
+        self.request['bundle']['todo']['manual_scores']['polish.manual']['value']=None
         with self.assertRaisesRegex(ValueError,'来源说明'):self.store.normalized(self.request['bundle'])
         self.request['bundle']=self.store.bundle();t=self.task();t.update(status='done',implementation_location='main')
         with self.assertRaisesRegex(ValueError,'验收说明'):self.store.normalized(self.request['bundle'])
         self.request['bundle']['verifications'][t['id']]={'note':'用户确认该设计完成','location':'main','source':'game_main'}
         self.save();a=self.store.preview(self.request);b=self.store.apply(self.request);self.assertEqual(a['snapshot_id'],b['record']['snapshot_id'])
     def test_unknown_score_and_moving_one_child(self):
-        b=self.request['bundle'];b['todo']['manual_scores']['art.ui']['value']=None;b['manual_notes']['art.ui']='暂未确认新 UI 评分'
-        result=self.store.normalized(b);self.assertIsNone(result['todo']['manual_scores']['art.ui']['value'])
+        b=self.request['bundle'];b['todo']['manual_scores']['polish.manual']['value']=None;b['manual_notes']['polish.manual']='暂未确认打磨评分'
+        result=self.store.normalized(b);self.assertIsNone(result['todo']['manual_scores']['polish.manual']['value'])
         b=self.store.bundle();tasks=[t for t in b['todo']['items'] if t['kind']=='task'];moving=tasks[0];parent=next(g for g in b['todo']['items'] if g['kind']=='group' and g['id']!=moving['parent_id'] and g['dimension']==moving['dimension'])
         old_parent=moving['parent_id'];weight=moving['weight'];moving['parent_id']=parent['id'];b['todo']['group_budgets'][old_parent]-=weight;b['todo']['group_budgets'][parent['id']]+=weight
-        # Empty source group must also be removed explicitly; do not implicitly move siblings.
-        old_group=next(g for g in b['todo']['items'] if g['id']==old_parent)
-        b['trash']=[{'id':'trash.move','items':[old_group],'budgets':{old_parent:b['todo']['group_budgets'][old_parent]}}]
-        b['todo']['items']=[g for g in b['todo']['items'] if g['id']!=old_parent];del b['todo']['group_budgets'][old_parent]
-        for section in ('candidate_notes','pending_decisions'):
-            for r in b['todo'][section]:r['related_ids']=[i for i in r['related_ids'] if i!=old_parent]
+        if not any(t['parent_id']==old_parent for t in b['todo']['items']):
+            old_group=next(g for g in b['todo']['items'] if g['id']==old_parent)
+            b['trash']=[{'id':'trash.move','items':[old_group],'budgets':{old_parent:b['todo']['group_budgets'][old_parent]}}]
+            b['todo']['items']=[g for g in b['todo']['items'] if g['id']!=old_parent];del b['todo']['group_budgets'][old_parent]
+            for section in ('candidate_notes','pending_decisions'):
+                for r in b['todo'][section]:r['related_ids']=[i for i in r['related_ids'] if i!=old_parent]
         b['change']={'type':'demo_expansion','reason':'移动一个子项并显式移除空组'}
         result=self.store.normalized(b);self.assertEqual(next(t for t in result['todo']['items'] if t['id']==moving['id'])['parent_id'],parent['id'])
 
-    def test_branch_done_stays_unknown(self):
+    def test_branch_done_scores_but_keeps_branch_evidence(self):
         t=self.task();t.update(status='done',implementation_location='feature_branch');self.request['bundle']['verifications'][t['id']]={'note':'功能分支人工验收通过','location':'feature_branch','source':'game_minigame'}
         value=self.store.normalized(self.request['bundle']);from progress import task_score
-        task=next(x for x in value['todo']['items'] if x['id']==t['id']);self.assertIsNone(task_score(task,value['todo']['rules']))
+        task=next(x for x in value['todo']['items'] if x['id']==t['id']);self.assertEqual(task_score(task,value['todo']['rules']),100);self.assertEqual(task['implementation_location'],'feature_branch')
     def test_legacy_draft_removes_dependencies(self):
         b=self.request['bundle'];b['todo']['schema_version']='1.1.0'
         for t in b['todo']['items']:t['dependencies']=['old-task']
         self.task()['title']='保留草稿修改'
         result=self.store.normalized(b)
-        self.assertEqual(result['todo']['schema_version'],'1.2.0')
+        self.assertEqual(result['todo']['schema_version'],'1.3.0')
         self.assertFalse(any('dependencies' in t for t in result['todo']['items']))
-        self.assertEqual(next(t for t in result['todo']['items'] if t['kind']=='task')['title'],'保留草稿修改')
+        self.assertEqual(next(t for t in result['todo']['items'] if t['id']==self.task()['id'])['title'],'保留草稿修改')
+
+    def test_restore_legacy_backup_requires_explicit_ui_selection(self):
+        self.task()['title']='恢复兼容检查';self.save();applied=self.store.apply(self.request)
+        backup=self.store.local/'backups'/applied['record']['id']/'todo.json'
+        old=read(backup);old['schema_version']='1.2.0'
+        old['rules'].pop('ui_group_ids');old['rules'].pop('feature_branch_scoring')
+        old['manual_scores']['art.ui']=copy.deepcopy(old['manual_scores']['polish.manual']);old['manual_scores']['art.ui']['value']=50
+        manual=copy.deepcopy(next(t for t in old['items'] if t['kind']=='manual'));manual.update(id='art.ui',dimension='art');old['items'].append(manual)
+        write(backup,old)
+        state=self.store.state();req={'base_revision':state['base_revision'],'draft_revision':0,'id':applied['record']['id']}
+        restored=self.store.restore(req);bundle=restored['bundle']
+        self.assertEqual(bundle['todo']['schema_version'],'1.3.0')
+        self.assertNotIn('art.ui',bundle['todo']['manual_scores'])
+        with self.assertRaisesRegex(ValueError,'请选择有效的 UI'):self.store.normalized(bundle)
+        bundle['todo']['rules']['ui_group_ids']=self.store.bundle()['todo']['rules']['ui_group_ids']
+        self.assertNotIn('art.ui',self.store.normalized(bundle)['todo']['manual_scores'])
 
     def test_bad_budget(self):
         self.task()['weight']+=1;self.request['bundle']['change']={'type':'refinement','reason':'调整子项'}
         with self.assertRaisesRegex(ValueError,'budget'):self.store.normalized(self.request['bundle'])
     def test_rule_versions_and_ranges(self):
         b=self.request['bundle'];b['todo']['rules']['art_ui_share']=.3;b['change']={'type':'rule_change','reason':'调整 UI 比例'};self.save()
-        p=self.store.preview(self.request);a=self.store.apply(self.request);self.assertEqual(p['snapshot_id'],a['record']['snapshot_id']);self.assertNotEqual(read(self.root/'todo.json')['snapshot']['rules_version'],'confirmed-v1')
+        p=self.store.preview(self.request);a=self.store.apply(self.request);self.assertEqual(p['snapshot_id'],a['record']['snapshot_id']);self.assertNotEqual(read(self.root/'todo.json')['snapshot']['rules_version'],'confirmed-v2')
     def test_failed_apply_rolls_back(self):
         before={p:(self.root/p).read_bytes() for p in ('todo.json','site.config.json','history/snapshots.json','site/data/current.json')};self.task()['title']='修改标题';self.save()
         import manager_store
@@ -99,14 +115,29 @@ class ManagerTests(unittest.TestCase):
     def test_deleted_related_reference_rejected(self):
         b=self.request['bundle'];todo=b['todo'];group=next(t for t in todo['items'] if t['kind']=='group');ids={group['id']}|{t['id'] for t in todo['items'] if t['parent_id']==group['id']};gone=[t for t in todo['items'] if t['id'] in ids]
         b['trash']=[{'id':'trash.test','items':gone,'budgets':{group['id']:todo['group_budgets'][group['id']]}}];todo['items']=[t for t in todo['items'] if t['id'] not in ids];del todo['group_budgets'][group['id']];b['change']={'type':'demo_expansion','reason':'移除范围内目标'}
-        todo['pending_decisions'][0]['related_ids']=[gone[-1]['id']]
+        todo['pending_decisions'][0]['related_ids']=['missing-task']
         with self.assertRaisesRegex(ValueError,'related ID'):self.store.normalized(b)
+        todo['pending_decisions'][0]['related_ids']=[]
         for k in ('candidate_notes','pending_decisions'):
             for r in todo[k]:r['related_ids']=[i for i in r['related_ids'] if i not in ids]
-        value=self.store.normalized(b);self.assertNotEqual(value['todo']['snapshot']['scope_version'],'demo-v1')
+        value=self.store.normalized(b);self.assertNotEqual(value['todo']['snapshot']['scope_version'],'demo-formal-v1')
+    def test_deletion_archives_auxiliary_references(self):
+        b=self.request['bundle'];todo=b['todo'];group=next(t for t in todo['items'] if t['kind']=='group')
+        ids={group['id']}|{t['id'] for t in todo['items'] if t['parent_id']==group['id']}
+        gone=[t for t in todo['items'] if t['id'] in ids]
+        b['trash']=[{'id':'trash.test','items':gone,'budgets':{group['id']:todo['group_budgets'][group['id']]}}]
+        todo['items']=[t for t in todo['items'] if t['id'] not in ids];del todo['group_budgets'][group['id']]
+        b['change']={'type':'demo_expansion','reason':'用户删除目标'}
+        record=todo['pending_decisions'][0];record['related_ids']=[gone[-1]['id']]
+        text=copy.deepcopy(record)
+        value=self.store.normalized(b)
+        actual=next(r for r in value['todo']['pending_decisions'] if r['id']==record['id'])
+        self.assertEqual(actual['related_ids'],[])
+        self.assertEqual(actual['question'],text['question'])
+        self.assertIn({'section':'pending_decisions','id':record['id'],'related_ids':[gone[-1]['id']]},value['trash'][0]['related_references'])
     def test_refinement_preserves_budget(self):
         b=self.request['bundle'];t=self.task();extra=copy.deepcopy(t);extra['id']='task.new-refinement';extra['title']='目标细分';t['weight']/=2;extra['weight']=t['weight'];b['todo']['items'].append(extra);b['change']={'type':'refinement','reason':'原目标细分，保留预算'}
-        value=self.store.normalized(b);self.assertEqual(value['todo']['snapshot']['scope_version'],'demo-v1')
+        value=self.store.normalized(b);self.assertEqual(value['todo']['snapshot']['scope_version'],'demo-formal-v1')
     def test_browser_numeric_roundtrip_is_not_progress(self):
         import re
         b=json.loads(re.sub(r'(?<=\d)\.0(?=[,}\]])','',json.dumps(self.request['bundle'])))

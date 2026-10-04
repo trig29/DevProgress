@@ -32,12 +32,12 @@ function meter(value, label) {
   return bar;
 }
 function validateData(data, timeline) {
-  if(data.schema_version!=='1.0.0'||timeline.schema_version!=='1.0.0') throw new Error('数据格式版本不兼容。');
+  if(data.schema_version!=='1.1.0'||timeline.schema_version!=='1.0.0') throw new Error('数据格式版本不兼容。');
   if(!Array.isArray(data.dimensions)||data.dimensions.length!==4||!Array.isArray(data.groups)||!Array.isArray(timeline.snapshots)||!timeline.snapshots.length) throw new Error('进度数据不完整。');
   const number = (v) => v===null || (typeof v==='number' && Number.isFinite(v) && v>=0 && v<=100);
   const validDate = (v) => typeof v==='string' && Number.isFinite(Date.parse(v));
   for(const snapshot of [data,...timeline.snapshots]) {
-    if(!validDate(snapshot.evaluated_at)||!number(snapshot.overall)||!Array.isArray(snapshot.dimensions)||!snapshot.dimensions.every(d=>number(d.score)&&number(d.contribution)&&number(d.manual_score))) throw new Error('进度数值或评估时间无效。');
+    if(!validDate(snapshot.evaluated_at)||!number(snapshot.overall)||!Array.isArray(snapshot.dimensions)||!snapshot.dimensions.every(d=>number(d.score)&&number(d.contribution)&&number(d.manual_score)&&number(d.ui_score))) throw new Error('进度数值或评估时间无效。');
   }
   if(timeline.snapshots.at(-1).snapshot_id!==data.snapshot_id) throw new Error('当前评估与历史快照不一致，请重试。');
   if(data.published_at!==null&&!validDate(data.published_at)) throw new Error('网站发布时间无效。');
@@ -92,7 +92,7 @@ function render() {
   if(page==='history') renderHistory();
   if(page==='method') {
     const r=current.rules;
-    $('rule-summary').textContent=`剧情 ${Math.round(r.dimension_shares.story*100)}%、美术与场景 ${Math.round(r.dimension_shares.art*100)}%、系统 ${Math.round(r.dimension_shares.system*100)}%、手动打磨 ${Math.round(r.dimension_shares.polish*100)}%。UI 占美术维度 ${Math.round(r.art_ui_share*100)}%。状态计分档位：${Object.values(r.status_factors).map(f=>Math.round(f*100)+'%').join(' / ')}。`;
+    $('rule-summary').textContent=`剧情 ${Math.round(r.dimension_shares.story*100)}%、美术与场景 ${Math.round(r.dimension_shares.art*100)}%、系统 ${Math.round(r.dimension_shares.system*100)}%、手动打磨 ${Math.round(r.dimension_shares.polish*100)}%。UI 按专属任务自动计算，占美术维度 ${Math.round(r.art_ui_share*100)}%，不重复计入其他美术任务。功能分支按实际状态计分，集成任务单独计分。状态计分档位：${Object.values(r.status_factors).map(f=>Math.round(f*100)+'%').join(' / ')}。`;
     $('versions').textContent=`范围 ${current.scope_version} · 规则 ${current.rules_version} · ${r.approval==='confirmed'?'评分规则已确认':'评分规则为草案'} · 数据生成 ${dateLabel(current.generated_at)}（美国东部时间）`;
   }
 }
@@ -105,7 +105,8 @@ function renderDimensions() {
     const progress=meter(d.score,`${d.label}完成度`);
     if(d.score!==null) progress.firstChild.style.background=colors[d.id];
     card.append(heading,score,progress,contribution,el('p',d.review,'card-review'));
-    if(d.id==='art'||d.id==='polish') card.append(el('p',`${d.id==='art'?'UI 完成度':'打磨成熟度'} · 开发者手动评分 ${d.manual_score===null?'待填写':pct(d.manual_score)}`,'manual-line'));
+    if(d.id==='art') card.append(el('p',`UI 完成度 · 任务自动计算 ${d.ui_score===null?'待完善':pct(d.ui_score)}`,'manual-line'));
+    if(d.id==='polish') card.append(el('p',`打磨成熟度 · 开发者手动评分 ${d.manual_score===null?'待填写':pct(d.manual_score)}`,'manual-line'));
     if(d.remaining.length) {const list=el('ul',undefined,'remaining-list');list.append(...d.remaining.map(t=>el('li',t)));card.append(list);}
     return card;
   }));

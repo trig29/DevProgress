@@ -13,7 +13,7 @@ def canonical(value):
 def task_score(task, rules):
     if task['status'] is None:
         return None
-    if task['implementation_location'] == 'feature_branch' and task['status'] != 'not_started':
+    if rules.get('feature_branch_scoring') != 'status' and task['implementation_location'] == 'feature_branch' and task['status'] != 'not_started':
         return None
     return rules['status_factors'][task['status']] * 100
 
@@ -40,11 +40,16 @@ def calculate(todo):
             reasons.append(f'{len(unknown)} 个任务的目标分支完成度待确认')
         value = weighted(relevant, rules) if dim != 'polish' else todo['manual_scores']['polish.manual']['value']
         manual = None
+        ui_score = None
         if dim == 'art':
-            manual = todo['manual_scores']['art.ui']['value']
-            if manual is None:
-                reasons.append('UI 手动分数待填写')
-            value = None if value is None or manual is None else value * (1-rules['art_ui_share']) + manual * rules['art_ui_share']
+            ui_groups = set(rules.get('ui_group_ids', []))
+            ui_tasks = [t for t in relevant if t['parent_id'] in ui_groups]
+            other_tasks = [t for t in relevant if t['parent_id'] not in ui_groups]
+            ui_score = weighted(ui_tasks, rules)
+            other_score = weighted(other_tasks, rules)
+            if not ui_tasks:reasons.append('请选择有效的 UI 任务大项')
+            if not other_tasks:reasons.append('其他美术任务未配置')
+            value = None if other_score is None or ui_score is None else other_score * (1-rules['art_ui_share']) + ui_score * rules['art_ui_share']
         elif dim == 'polish':
             manual = value
             if value is None:
@@ -52,7 +57,7 @@ def calculate(todo):
         if not confirmed:
             value = None
         share = rules['dimension_shares'][dim]
-        dimensions.append({'id': dim, 'label': next(d['title'] for d in todo['dimensions'] if d['id']==dim), 'score': value, 'share': share, 'contribution': None if value is None else value*share, 'manual_score': manual, 'unknown_task_ids': unknown, 'missing_reasons': reasons})
+        dimensions.append({'id': dim, 'label': next(d['title'] for d in todo['dimensions'] if d['id']==dim), 'score': value, 'share': share, 'contribution': None if value is None else value*share, 'manual_score': manual, 'ui_score':ui_score, 'unknown_task_ids': unknown, 'missing_reasons': reasons})
     overall = None if any(d['score'] is None for d in dimensions) else sum(d['contribution'] for d in dimensions)
     return {'overall': overall, 'dimensions': dimensions, 'missing_reasons': [f'{d["label"]}：{reason}' for d in dimensions for reason in d['missing_reasons']]}
 
@@ -93,7 +98,7 @@ def make_snapshot(todo, config):
         fallback = '手动评分由开发者提供。' if dim['id']=='polish' else f'当前有 {len(dim["unknown_task_ids"])} 个目标分支任务待确认；依据静态实现与人工验收记录评估。'
         summaries.append({**dim, 'review': custom or fallback, 'remaining': remaining})
     snapshot = {
-        'schema_version':'1.0.0', 'snapshot_id':'',
+        'schema_version':'1.1.0', 'snapshot_id':'',
         'project': {'id':todo['project']['id'],'title':config['title'],'phase':todo['project']['phase'],'phase_label':config['phase_label']},
         'evaluated_at':evaluation['evaluated_at'], 'scope_version':todo['snapshot']['scope_version'], 'rules_version':todo['snapshot']['rules_version'],
         'sources': [s for s in todo['sources'] if s['kind']=='git'],

@@ -14,7 +14,7 @@ DEFAULT = {'schema_version': '1.0.0', 'pages': {k: {'title': v[0], 'intro': v[1]
     'dimensions-title':'维度完成度','updates-title':'本次评估','todos-title':'任务列表','history-title':'趋势与评估记录','method-title':'评分规则',
     'method-weight-title':'按目标与权重计算','method-status-title':'状态与验收',
     'method-weight-note':'只计算 Demo 范围内的最末层任务，父项只汇总；任务细化保持原预算。范围扩大或规则改变时，记录原因并保留过去的口径。',
-    'method-status-note':'未知状态保持待确认。功能分支已有实现单独记录，主分支集成后才能确认 Demo 中可用。UI 与打磨由开发者分别评分。',
+    'method-status-note':'未知状态保持待确认。功能分支按实际状态计分并单独标记，主分支集成任务独立计算；分支成果不代表已在 Demo 主分支可体验。UI 按任务自动计算，打磨由开发者手动评分。',
     'method-limit-note':'静态检查不能替代游戏运行、视觉或听觉验收。百分比不预测剩余工时，也不自动代表发布就绪。',
     'todo-note':'任务数量仅供浏览参考，完成度按相对权重计算。展开大项可查看必要子项。已完成的大项和子项排在各自列表末尾。',
     'empty':'此筛选下没有任务。可以切换维度、状态或查看范围。',

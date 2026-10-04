@@ -34,10 +34,11 @@ def all_completed():
 class ProgressTests(unittest.TestCase):
     def test_real_baseline(self):
         result = calculate(fixture())
-        self.assertIsNone(result['overall'])
+        self.assertAlmostEqual(result['overall'],34.747231715652774)
         dims = {d['id']:d for d in result['dimensions']}
-        self.assertIsNone(dims['art']['score'])
-        self.assertEqual(dims['art']['manual_score'], 50)
+        self.assertAlmostEqual(dims['art']['score'],17.87012987012987)
+        self.assertIsNone(dims['art']['manual_score'])
+        self.assertEqual(dims['art']['ui_score'],0)
         self.assertEqual(dims['polish']['score'], 10)
         self.assertEqual(dims['polish']['contribution'], 3)
 
@@ -62,12 +63,14 @@ class ProgressTests(unittest.TestCase):
     def test_unknown_and_unstarted_group_does_not_claim_work_started(self):
         self.assertEqual(group_status([{'status':None},{'status':'not_started'}]),'pending_confirmation')
 
-    def test_feature_branch_does_not_score_as_main(self):
+    def test_feature_branch_scores_status_without_claiming_integration(self):
         data = all_completed()
         task = next(i for i in data['items'] if i['id']=='system.minigame_play.implementation')
         task['implementation_location']='feature_branch'
-        self.assertIsNone(task_score(task,data['rules']))
-        self.assertIsNone(calculate(data)['overall'])
+        task['status']='in_progress'
+        self.assertEqual(task_score(task,data['rules']),40)
+        self.assertEqual(task['implementation_location'],'feature_branch')
+        self.assertIsNotNone(calculate(data)['overall'])
 
     def test_draft_rules_block_scores_but_preserve_manual_values(self):
         data = all_completed(); data['rules']['approval']='draft'
@@ -76,21 +79,41 @@ class ProgressTests(unittest.TestCase):
         self.assertEqual(result['dimensions'][3]['manual_score'],100)
 
     def test_missing_manual_is_not_zero(self):
-        data = all_completed(); data['manual_scores']['art.ui']['value']=None
+        data = all_completed(); data['manual_scores']['polish.manual']['value']=None
         self.assertIsNone(calculate(data)['overall'])
-        self.assertIsNone(calculate(data)['dimensions'][1]['score'])
+        self.assertIsNone(calculate(data)['dimensions'][3]['score'])
 
     def test_weighted_not_counted_and_ui_is_separate(self):
         data = all_completed()
         task = next(i for i in data['items'] if i['kind']=='task' and i['dimension']=='art')
         task['status']='not_started'
-        total = sum(i['weight'] for i in data['items'] if i['kind']=='task' and i['dimension']=='art')
+        total = sum(i['weight'] for i in data['items'] if i['kind']=='task' and i['dimension']=='art' and i['parent_id'] not in data['rules']['ui_group_ids'])
         expected=(100-100*task['weight']/total)*.8+100*.2
         self.assertAlmostEqual(calculate(data)['dimensions'][1]['score'],expected)
 
+    def test_ui_tasks_use_only_the_ui_share_and_unknown_stays_unknown(self):
+        data=all_completed()
+        ui=[t for t in data['items'] if t['kind']=='task' and t['parent_id'] in data['rules']['ui_group_ids']]
+        for t in ui:t['status']='not_started'
+        art=calculate(data)['dimensions'][1]
+        self.assertEqual(art['ui_score'],0)
+        self.assertEqual(art['score'],80)
+        ui[0]['status']=None
+        self.assertIsNone(calculate(data)['dimensions'][1]['ui_score'])
+        self.assertIsNone(calculate(data)['overall'])
+
+    def test_ui_selection_rejects_duplicates_missing_and_non_art_groups(self):
+        data=fixture();valid=data['rules']['ui_group_ids'][0]
+        story=next(t['id'] for t in data['items'] if t['kind']=='group' and t['dimension']=='story')
+        for ids in ([],[valid,valid],['missing'],[story]):
+            data['rules']['ui_group_ids']=ids
+            self.assertTrue(validate(data))
+        data['rules']['ui_group_ids']=[t['id'] for t in data['items'] if t['kind']=='group' and t['dimension']=='art']
+        self.assertTrue(validate(data))
+
     def test_schema_rejects_extra_fields_bool_scores_nan_and_bad_datetime(self):
         schema = read(ROOT/'todo.schema.json')
-        for mutate in [lambda d:d.update(extra=True),lambda d:d['manual_scores']['art.ui'].update(value=True),lambda d:d['manual_scores']['art.ui'].update(value=float('nan')),lambda d:d['evaluation'].update(evaluated_at='2026-10-04')]:
+        for mutate in [lambda d:d.update(extra=True),lambda d:d['manual_scores']['polish.manual'].update(value=True),lambda d:d['manual_scores']['polish.manual'].update(value=float('nan')),lambda d:d['evaluation'].update(evaluated_at='2026-10-04')]:
             data=fixture();mutate(data);self.assertTrue(validate_schema(data,schema))
 
     def test_references_budget_and_done_proof(self):
@@ -116,7 +139,7 @@ class ProgressTests(unittest.TestCase):
     def test_future_tasks_do_not_score(self):
         data=all_completed()
         for i in data['items']:
-            if i['id'].startswith('story.scope'):
+            if i['id'].startswith('story.opening'):
                 i.update(scope='future',status=None)
         self.assertEqual(calculate(data)['overall'],100)
 
@@ -155,7 +178,7 @@ class ExportTests(unittest.TestCase):
         self.assertEqual(history[0]['dimensions'][3]['score'],10)
         self.assertEqual(history[1]['dimensions'][3]['score'],20)
         self.assertIsNone(new['published_at'])
-        self.assertIsNone(new['update']['delta'])
+        self.assertAlmostEqual(new['update']['delta'],3)
         self.assertEqual(history[0]['snapshot_id'],old['snapshot_id'])
 
     def test_output_allowlist_and_full_download(self):
