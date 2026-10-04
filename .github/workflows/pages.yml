@@ -31,6 +31,18 @@ jobs:
         run: |
           python3 validate_todo.py
           python3 -m unittest discover -s tests -v
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from build_site import read
+          from progress import make_snapshot
+          root = Path('.')
+          actual = make_snapshot(read(root/'todo.json'), read(root/'site.config.json'))['snapshot_id']
+          expected = read(root/'history/snapshots.json')['snapshots'][-1]['snapshot_id']
+          if actual != expected:
+              raise SystemExit('Snapshot differs from the checked-in local build; refusing to publish extra history.')
+          PY
           python3 scripts/build_site.py
       - uses: actions/configure-pages@v5
         id: pages

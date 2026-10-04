@@ -3,7 +3,7 @@
   "snapshots": [
     {
       "schema_version": "1.1.0",
-      "snapshot_id": "301f1d467ec54ba08ffc",
+      "snapshot_id": "5a714755ce40407f5660",
       "project": {
         "id": "godot-rpg-demo",
         "title": "北四楼来信 开发进度",
@@ -32,7 +32,7 @@
         }
       ],
       "todo_sha256": "5f05ec34bc6e812163b3931c7a56311318edc14d7791d92826920d26d0024981",
-      "overall": 34.747231715652774,
+      "overall": 34.74723171565277,
       "dimensions": [
         {
           "id": "story",
@@ -161,7 +161,7 @@
           "scope": "demo",
           "status": "done",
           "score": 100.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -195,7 +195,7 @@
           "scope": "demo",
           "status": "done",
           "score": 100.0,
-          "weight": 8,
+          "weight": 8.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -229,7 +229,7 @@
           "scope": "demo",
           "status": "done",
           "score": 100.0,
-          "weight": 10,
+          "weight": 10.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -263,7 +263,7 @@
           "scope": "demo",
           "status": "done",
           "score": 100.0,
-          "weight": 10,
+          "weight": 10.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -297,7 +297,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 33.333333333333336,
-          "weight": 12,
+          "weight": 12.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -331,7 +331,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 32.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -365,7 +365,7 @@
           "scope": "demo",
           "status": "done",
           "score": 100.0,
-          "weight": 3,
+          "weight": 3.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -399,7 +399,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 46.666666666666664,
-          "weight": 6,
+          "weight": 6.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -445,7 +445,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 50.0,
-          "weight": 4,
+          "weight": 4.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -479,7 +479,7 @@
           "scope": "demo",
           "status": "done",
           "score": 100.0,
-          "weight": 3,
+          "weight": 3.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -513,7 +513,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 6,
+          "weight": 6.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -558,7 +558,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -603,7 +603,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -648,7 +648,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -693,7 +693,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -738,7 +738,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -783,7 +783,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -828,7 +828,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 36.666666666666664,
-          "weight": 12,
+          "weight": 12.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -884,7 +884,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 33.333333333333336,
-          "weight": 6,
+          "weight": 6.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -918,7 +918,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 6,
+          "weight": 6.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -952,7 +952,7 @@
           "scope": "demo",
           "status": "done",
           "score": 100.0,
-          "weight": 6,
+          "weight": 6.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -986,7 +986,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 96.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1020,7 +1020,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 96.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1054,7 +1054,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 97.14285714285714,
-          "weight": 7,
+          "weight": 7.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1088,7 +1088,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 30.0,
-          "weight": 4,
+          "weight": 4.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1122,7 +1122,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 32.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1156,7 +1156,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 40.0,
-          "weight": 3,
+          "weight": 3.0,
           "has_feature_branch": true,
           "children": [
             {
@@ -1179,7 +1179,7 @@
           "scope": "demo",
           "status": "in_progress",
           "score": 26.666666666666668,
-          "weight": 3,
+          "weight": 3.0,
           "has_feature_branch": true,
           "children": [
             {
@@ -1213,7 +1213,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 8,
+          "weight": 8.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1249,7 +1249,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 12,
+          "weight": 12.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1317,7 +1317,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 1,
+          "weight": 1.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1340,7 +1340,7 @@
           "scope": "demo",
           "status": "not_started",
           "score": 0.0,
-          "weight": 5,
+          "weight": 5.0,
           "has_feature_branch": false,
           "children": [
             {
@@ -1420,7 +1420,7 @@
         "comparable": false
       },
       "method": "静态评估 + 开发者提供的验收记录；未运行游戏",
-      "generated_at": "2026-10-04T18:00:31-04:00",
+      "generated_at": "2026-10-04T18:05:22-04:00",
       "published_at": null
     }
   ]

@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT/'scripts'))
-from progress import calculate, make_snapshot, compare, task_score, group_status
+from progress import calculate, make_snapshot, compare, task_score, group_status, weighted
 from build_site import build, read, checked
 from schema_check import validate_schema
 from validate_todo import validate
@@ -32,6 +32,10 @@ def all_completed():
 
 
 class ProgressTests(unittest.TestCase):
+    def test_fractional_weights_have_stable_precision(self):
+        tasks=[{'weight':w,'status':s,'implementation_location':'main'} for w,s in [(0.1,'done'),(0.2,'in_progress'),(0.3,'not_started')]]
+        self.assertEqual(weighted(tasks,fixture()['rules']),30.0)
+
     def test_real_baseline(self):
         result = calculate(fixture())
         self.assertAlmostEqual(result['overall'],34.747231715652774)

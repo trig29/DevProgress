@@ -1,6 +1,7 @@
 """Deterministic progress calculation. No game execution or repository mutation."""
 import hashlib
 import json
+import math
 from collections import Counter
 
 DIMENSIONS = ('story', 'art', 'system', 'polish')
@@ -22,7 +23,9 @@ def weighted(tasks, rules):
     scores = [task_score(task, rules) for task in tasks]
     if not tasks or any(score is None for score in scores):
         return None
-    return sum(t['weight'] * score for t, score in zip(tasks, scores)) / sum(t['weight'] for t in tasks)
+    # Python 3.12 changed builtin sum(float). Use the same compensated sum
+    # on local Python and CI so identical data produces the same snapshot ID.
+    return math.fsum(t['weight'] * score for t, score in zip(tasks, scores)) / math.fsum(t['weight'] for t in tasks)
 
 
 def calculate(todo):
@@ -58,7 +61,7 @@ def calculate(todo):
             value = None
         share = rules['dimension_shares'][dim]
         dimensions.append({'id': dim, 'label': next(d['title'] for d in todo['dimensions'] if d['id']==dim), 'score': value, 'share': share, 'contribution': None if value is None else value*share, 'manual_score': manual, 'ui_score':ui_score, 'unknown_task_ids': unknown, 'missing_reasons': reasons})
-    overall = None if any(d['score'] is None for d in dimensions) else sum(d['contribution'] for d in dimensions)
+    overall = None if any(d['score'] is None for d in dimensions) else math.fsum(d['contribution'] for d in dimensions)
     return {'overall': overall, 'dimensions': dimensions, 'missing_reasons': [f'{d["label"]}：{reason}' for d in dimensions for reason in d['missing_reasons']]}
 
 
@@ -82,7 +85,7 @@ def task_views(todo):
         if parent['kind'] != 'group':
             continue
         children = [t for t in todo['items'] if t['parent_id'] == parent['id']]
-        groups.append({'id': parent['id'], 'title': parent['title'], 'dimension': parent['dimension'], 'scope': parent['scope'], 'status': group_status(children), 'score': weighted(children, todo['rules']) if todo['rules']['approval']=='confirmed' else None, 'weight': sum(t['weight'] for t in children), 'has_feature_branch': any(t['implementation_location']=='feature_branch' for t in children), 'children': [{k:t[k] for k in ('id','title','status','assessment','completion_criteria','weight','implementation_location')} for t in children]})
+        groups.append({'id': parent['id'], 'title': parent['title'], 'dimension': parent['dimension'], 'scope': parent['scope'], 'status': group_status(children), 'score': weighted(children, todo['rules']) if todo['rules']['approval']=='confirmed' else None, 'weight': math.fsum(t['weight'] for t in children), 'has_feature_branch': any(t['implementation_location']=='feature_branch' for t in children), 'children': [{k:t[k] for k in ('id','title','status','assessment','completion_criteria','weight','implementation_location')} for t in children]})
     return groups
 
 
