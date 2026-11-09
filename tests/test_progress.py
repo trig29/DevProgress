@@ -37,7 +37,17 @@ class ProgressTests(unittest.TestCase):
         self.assertEqual(weighted(tasks,fixture()['rules']),30.0)
 
     def test_real_baseline(self):
-        result = calculate(fixture())
+        baseline = read(ROOT/'history'/'snapshots.json')['snapshots'][0]
+        data = {
+            'rules': baseline['rules'],
+            'manual_scores': baseline['manual_scores'],
+            'dimensions': [{'id':d['id'],'title':d['label']} for d in baseline['dimensions']],
+            'items': [
+                {**task,'kind':'task','parent_id':group['id'],'dimension':group['dimension'],'scope':group['scope']}
+                for group in baseline['groups'] for task in group['children']
+            ],
+        }
+        result = calculate(data)
         self.assertAlmostEqual(result['overall'],34.747231715652774)
         dims = {d['id']:d for d in result['dimensions']}
         self.assertAlmostEqual(dims['art']['score'],17.87012987012987)
@@ -136,7 +146,7 @@ class ProgressTests(unittest.TestCase):
         newer=make_snapshot(data,config);compare(newer,new)
         self.assertFalse(newer['update']['comparable']);self.assertIsNone(newer['update']['delta'])
         self.assertTrue(any(r['type']=='demo_expansion' for r in newer['update']['change_reasons']))
-        data['snapshot']['rules_version']='confirmed-v2'
+        data['snapshot']['rules_version']+='-test-change'
         changed=make_snapshot(data,config);compare(changed,newer)
         self.assertTrue(any(r['type']=='rule_change' for r in changed['update']['change_reasons']))
 

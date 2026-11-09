@@ -8,12 +8,12 @@
     "target_source": "game_main"
   },
   "snapshot": {
-    "date": "2026-10-04",
+    "date": "2026-11-09",
     "timezone": "America/New_York",
     "scope_version": "demo-formal-v1",
     "rules_version": "confirmed-v2",
     "assessment_method": "static_only",
-    "target_document_sha256": "e006b496db7615faec99548e73c7633dc0fd6a7fee8b7b85532a6c66aa0204d3",
+    "target_document_sha256": "846196c86bcd4130083a9488eb2362f2ef63d2920ae3fa09f2e584b734c33c68",
     "runtime_verification": "partially_provided"
   },
   "sources": [
@@ -40,6 +40,19 @@
     },
     {
       "id": "scope_formal_v1",
+      "kind": "document",
+      "path": "Demo目标.md"
+    },
+    {
+      "id": "game_main_41a6b7a",
+      "kind": "git",
+      "repository": "GodotRPGGameSystem",
+      "ref": "main",
+      "commit": "41a6b7a6785d20e5720dbc77d835a047436beed9",
+      "dirty": false
+    },
+    {
+      "id": "scope_review_20261109",
       "kind": "document",
       "path": "Demo目标.md"
     }
@@ -356,7 +369,8 @@
       ],
       "evidence_ids": [
         "E-ROOF",
-        "E-BASELINE-077fd5cc5c02"
+        "E-BASELINE-077fd5cc5c02",
+        "E-USER-20261109-ROOF"
       ],
       "verification_ids": [
         "V-STORY"
@@ -395,7 +409,8 @@
       ],
       "evidence_ids": [
         "E-SCOPE-FORMAL-V1",
-        "E-AFTERMATH"
+        "E-AFTERMATH",
+        "E-STATIC-20261109-AFTERMATH"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -453,7 +468,8 @@
         "补齐并接入日常探索所需普通NPC对话，不包含花园NPC组合的四段故事。"
       ],
       "evidence_ids": [
-        "E-NPC"
+        "E-NPC",
+        "E-STATIC-20261109-NPC"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -653,13 +669,14 @@
         "进入、探索、离开和剧情限制正常，必要场景内容可达且画面获确认。"
       ],
       "evidence_ids": [
-        "E-MAP-courtyard"
+        "E-MAP-courtyard",
+        "E-SCOPE-20261109"
       ],
       "verification_ids": [
         "V-MAP"
       ],
       "implementation_location": null,
-      "notes": ""
+      "notes": "开发者于2026-11-09T14:47:40-05:00审阅后明确要求保持未开始。"
     },
     {
       "id": "art.map_preroof",
@@ -1476,7 +1493,8 @@
       ],
       "evidence_ids": [
         "E-DIALOGUE",
-        "E-BASELINE-d65633583fc6"
+        "E-BASELINE-d65633583fc6",
+        "E-USER-20261109-DIALOGUE-IMPL"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -1496,7 +1514,8 @@
         "已设计的对白、选项、快进与自动播放正确工作，结束/中止恢复输入与镜头。"
       ],
       "evidence_ids": [
-        "E-BASELINE-99d8c723078a"
+        "E-BASELINE-99d8c723078a",
+        "E-USER-20261109-DIALOGUE-ACCEPT"
       ],
       "verification_ids": [
         "V-SYSTEM"
@@ -1535,7 +1554,8 @@
       ],
       "evidence_ids": [
         "E-EXPLORE",
-        "E-BASELINE-11c3a94894ab"
+        "E-BASELINE-11c3a94894ab",
+        "E-USER-20261109-EXPLORE"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -1592,7 +1612,8 @@
       ],
       "evidence_ids": [
         "E-EVENT",
-        "E-BASELINE-bfe29a3ab00b"
+        "E-BASELINE-bfe29a3ab00b",
+        "E-USER-20261109-EVENTS"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -1649,7 +1670,8 @@
       ],
       "evidence_ids": [
         "E-SAVE",
-        "E-BASELINE-232a04b115ca"
+        "E-BASELINE-232a04b115ca",
+        "E-USER-20261109-SAVE"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -1705,7 +1727,8 @@
         "复读机正确显示Demo任务/物品并更新阶段，移除影响理解的测试数据。"
       ],
       "evidence_ids": [
-        "E-RECORD"
+        "E-RECORD",
+        "E-STATIC-20261109-RECORDS"
       ],
       "verification_ids": [],
       "implementation_location": "main",
@@ -1918,39 +1941,45 @@
       "id": "task.1a81c0545e0940c7931ef4ba3d6b71e5",
       "parent_id": "group.f92c84a5b2704b50af33bc672a5d7a38",
       "kind": "task",
-      "title": "文案与演出",
+      "title": "完成",
       "dimension": "story",
       "scope": "demo",
       "weight": 7,
-      "status": "not_started",
+      "status": "done",
       "assessment": "assessed",
       "completion_criteria": [
-        "文案完整已转为对话文件",
-        "演出逻辑全部配置完成",
-        "角色动画与场景细节全部配置完成"
+        "本阶段文案、演出流程与整体验收已由开发者确认完成。",
+        "既有演出所需的素材替换及动作、镜头、节奏细调由同大项的打磨子项跟踪。"
       ],
-      "evidence_ids": [],
+      "evidence_ids": [
+        "E-USER-20261109-MIDDLE",
+        "E-STATIC-20261109-MIDDLE",
+        "E-SCOPE-20261109"
+      ],
       "verification_ids": [],
-      "implementation_location": null,
-      "notes": ""
+      "implementation_location": "main",
+      "notes": "开发者于2026-11-09T14:47:40-05:00批准将原文案与演出、验收整理为完成与打磨，保留原权重7和1及稳定ID；原验收要求并入本项。"
     },
     {
       "id": "task.98362c05064c4d868f42aff7b27b730c",
       "parent_id": "group.f92c84a5b2704b50af33bc672a5d7a38",
       "kind": "task",
-      "title": "验收",
+      "title": "打磨",
       "dimension": "story",
       "scope": "demo",
       "weight": 1,
       "status": "not_started",
       "assessment": "assessed",
       "completion_criteria": [
-        "整体验收完成"
+        "完成既有序章中段演出所需的素材替换及动作、镜头、节奏细调，并由开发者确认效果。"
       ],
-      "evidence_ids": [],
+      "evidence_ids": [
+        "E-STATIC-20261109-MIDDLE",
+        "E-SCOPE-20261109"
+      ],
       "verification_ids": [],
-      "implementation_location": null,
-      "notes": ""
+      "implementation_location": "main",
+      "notes": "开发者于2026-11-09T14:47:40-05:00批准由原验收子项调整为打磨，保留原ID与权重1；本项属于剧情大项既有预算，独立的打磨手动评分仍为10%。"
     },
     {
       "id": "group.8e3897d567c041e69fc6c3fb5e28c712",
@@ -2147,15 +2176,19 @@
       "dimension": "art",
       "scope": "demo",
       "weight": 2,
-      "status": "not_started",
+      "status": "done",
       "assessment": "assessed",
       "completion_criteria": [
         "完成素材绘制",
         "配置素材"
       ],
-      "evidence_ids": [],
+      "evidence_ids": [
+        "E-USER-20261109-UI-DIALOGUE",
+        "E-STATIC-20261109-UI",
+        "E-SCOPE-20261109"
+      ],
       "verification_ids": [],
-      "implementation_location": null,
+      "implementation_location": "main",
       "notes": ""
     },
     {
@@ -2166,14 +2199,18 @@
       "dimension": "art",
       "scope": "demo",
       "weight": 1,
-      "status": "not_started",
+      "status": "done",
       "assessment": "assessed",
       "completion_criteria": [
         "完成复读机素材绘制"
       ],
-      "evidence_ids": [],
+      "evidence_ids": [
+        "E-USER-20261109-UI-JOURNAL",
+        "E-STATIC-20261109-UI",
+        "E-SCOPE-20261109"
+      ],
       "verification_ids": [],
-      "implementation_location": null,
+      "implementation_location": "main",
       "notes": ""
     },
     {
@@ -2190,10 +2227,12 @@
         "完成素材设计与绘制",
         "配置素材"
       ],
-      "evidence_ids": [],
+      "evidence_ids": [
+        "E-SCOPE-20261109"
+      ],
       "verification_ids": [],
       "implementation_location": null,
-      "notes": ""
+      "notes": "开发者于2026-11-09T14:47:40-05:00审阅后明确要求保持未开始。"
     }
   ],
   "evidence": [
@@ -2652,6 +2691,166 @@
       ],
       "kind": "document",
       "summary": "开发者确认32个大项、75个子项为首次正式Demo跟踪范围；旧支线占位、五张走廊地图和小游戏状态／独立验收大项不再自动纳入。"
+    },
+    {
+      "id": "E-USER-20261109-MIDDLE",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/Events/Prologue/roof/prologue_middle.gd",
+        "Scripts/Events/Prologue/roof/prologue_middle_stage.gd",
+        "Scenes/Events/Prologue/roof/prologue_middle_stage.tscn"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者要求序章中段大项细分为完成与打磨，完成标记为已完成、打磨标记为未开始，并批准完成权重7、打磨权重1，原验收并入完成的修订方案。"
+    },
+    {
+      "id": "E-USER-20261109-UI-DIALOGUE",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scenes/UILayer/dialogue_module.tscn",
+        "Scripts/UILayer/DialogueModule/dialogue_box.gd"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者审阅对话框UI后明确回复“改为已完成”。"
+    },
+    {
+      "id": "E-USER-20261109-UI-JOURNAL",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scenes/UILayer/journal.tscn",
+        "Resources/UI/journal_retro_theme.tres",
+        "Scenes/UILayer/Journal/home_page.tscn"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者审阅复读机UI后明确回复“改为已完成”。"
+    },
+    {
+      "id": "E-USER-20261109-ROOF",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/Events/Prologue/roof/roof_talk_4.gd"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者明确确认天台段落人工验收“均已通过验收，保留已完成”。"
+    },
+    {
+      "id": "E-USER-20261109-DIALOGUE-IMPL",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/UILayer/DialogueModule/dialogue_module.gd",
+        "Scripts/UILayer/DialogueModule/dialogue_box.gd"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者明确确认对话系统实现“均已通过验收，保留已完成”。"
+    },
+    {
+      "id": "E-USER-20261109-DIALOGUE-ACCEPT",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/UILayer/DialogueModule/dialogue_module.gd",
+        "Scripts/UILayer/DialogueModule/choice_box.gd"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者明确确认对话系统人工验收“均已通过验收，保留已完成”。"
+    },
+    {
+      "id": "E-USER-20261109-EXPLORE",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/Autoload/scene_manager.gd",
+        "Scripts/interaction_trigger.gd",
+        "Scripts/Autoload/player_movement_gate.gd"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者明确确认地图探索实现“均已通过验收，保留已完成”。"
+    },
+    {
+      "id": "E-USER-20261109-EVENTS",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/event_base.gd",
+        "Scripts/Autoload/game_manager.gd",
+        "Resources/Events/event_catalog.tres"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者明确确认事件系统实现“均已通过验收，保留已完成”。"
+    },
+    {
+      "id": "E-USER-20261109-SAVE",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/State/save_schema.gd",
+        "Scripts/State/game_state_store.gd",
+        "Scripts/Autoload/game_manager.gd"
+      ],
+      "kind": "user_verification",
+      "summary": "用户确认时间：2026-11-09T14:47:40-05:00；适用main 41a6b7a6785d20e5720dbc77d835a047436beed9。开发者明确确认当前版本存读档实现“均已通过验收，保留已完成”；本次确认仅关联实现任务，其他整体验收状态保留。"
+    },
+    {
+      "id": "E-STATIC-20261109-MIDDLE",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/Events/Prologue/roof/prologue_middle.gd",
+        "Scripts/Events/Prologue/roof/prologue_middle_stage.gd"
+      ],
+      "kind": "static_review",
+      "summary": "已接入文案读取、分轮选项、回忆与坠落演出及花园交接；仍有占位素材和细调入口，按开发者批准归入打磨子项。 静态读取独立干净提交副本，未纳入原工作区未提交内容，未运行游戏。"
+    },
+    {
+      "id": "E-STATIC-20261109-AFTERMATH",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/Events/Prologue/courtyard/aftermath_first.gd",
+        "Scripts/Events/Prologue/classroom_main/aftermath_second.gd",
+        "Scripts/Events/Prologue/playground/aftermath_lets_talk.gd"
+      ],
+      "kind": "static_review",
+      "summary": "花园尾声已实现标题、引文、镜头、角色动作、收尾及任务发放；后续两个事件的run_event仍为pass，序章其余段落与收尾保持进行中。 静态读取独立干净提交副本，未纳入原工作区未提交内容，未运行游戏。"
+    },
+    {
+      "id": "E-STATIC-20261109-NPC",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scenes/NPC/cat_wang.tscn",
+        "Scripts/Events/Shared/npc/dialogue.gd",
+        "Scripts/NPC/npc_stage_selector.gd",
+        "Scenes/Maps/Base/courtyard.tscn"
+      ],
+      "kind": "static_review",
+      "summary": "已接入普通NPC分阶段首次/重复对话与交谈记录；仅记录日常NPC实现，不扩展为四个花园故事的完成证据。 静态读取独立干净提交副本，未纳入原工作区未提交内容，未运行游戏。"
+    },
+    {
+      "id": "E-STATIC-20261109-RECORDS",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scripts/UILayer/Journal/task_page.gd",
+        "Scripts/UILayer/Journal/item_page.gd",
+        "initial_game_state.json",
+        "Resources/Content/Characters/zhang_tong.tres"
+      ],
+      "kind": "static_review",
+      "summary": "任务和物品页面已重制，按角色管理的初始物品仍含sample_item；测试数据清理与必要记录验收仍待完成，保持进行中。 静态读取独立干净提交副本，未纳入原工作区未提交内容，未运行游戏。"
+    },
+    {
+      "id": "E-STATIC-20261109-UI",
+      "source": "game_main_41a6b7a",
+      "paths": [
+        "Scenes/UILayer/dialogue_module.tscn",
+        "Scripts/UILayer/DialogueModule/dialogue_box.gd",
+        "Scenes/UILayer/journal.tscn",
+        "Resources/UI/journal_retro_theme.tres"
+      ],
+      "kind": "static_review",
+      "summary": "main已接入双行滚动对白、新复读机主题和主页、任务、物品、收藏入口；两个UI子项的已完成状态分别依据开发者明确确认。 静态读取独立干净提交副本，未纳入原工作区未提交内容，未运行游戏。"
+    },
+    {
+      "id": "E-SCOPE-20261109",
+      "source": "scope_review_20261109",
+      "paths": [
+        "Demo目标.md"
+      ],
+      "kind": "document",
+      "summary": "开发者批准序章中段完成7/打磨1的细化、两项UI已完成、花园细节及暂停/设置UI保持未开始；32个大项、75个子项、总预算与评分规则保持不变。"
     }
   ],
   "verification_plans": [
@@ -2815,6 +3014,22 @@
       "rules_version": "confirmed-v2",
       "game_commit": "93912616ecec5e4b839e91ff94301bbfcf1e6dc0",
       "summary": "采用开发者修改及确认后的首次正式基线；19项main验收，UI自动计分，分支实际状态计分，试运行历史本地归档。"
+    },
+    {
+      "date": "2026-11-09",
+      "type": "refinement",
+      "scope_version": "demo-formal-v1",
+      "rules_version": "confirmed-v2",
+      "game_commit": "41a6b7a6785d20e5720dbc77d835a047436beed9",
+      "summary": "开发者批准序章中段完成7（已完成）/打磨1（未开始）的细化，原验收并入完成；保留稳定ID、两层结构和全部预算。"
+    },
+    {
+      "date": "2026-11-09",
+      "type": "status_update",
+      "scope_version": "demo-formal-v1",
+      "rules_version": "confirmed-v2",
+      "game_commit": "41a6b7a6785d20e5720dbc77d835a047436beed9",
+      "summary": "开发者确认对话框UI、复读机UI及序章中段完成项已完成；六项天台/系统验收保留已完成并增加当前main证据。花园细节、暂停/设置UI保持未开始，打磨手动10%及小游戏状态保留。"
     }
   ],
   "group_budgets": {
@@ -2852,32 +3067,33 @@
     "group.57818e1917914f52a253b37b517a1e56": 5
   },
   "evaluation": {
-    "evaluated_at": "2026-10-04T17:55:37-04:00",
+    "evaluated_at": "2026-11-09T14:47:40-05:00",
     "highlights": [
-      "开发者确认首次正式清单：32个大项、75个子项，并确认19项任务已在main验收完成。",
-      "前导、教室、校园推进和天台段落已验收；序章中段演出、后段演出与完整流程验收仍待完成。",
-      "普通NPC日常对话与四个花园故事分别跟踪；地图、美术和系统按开发者调整后的任务与预算计分。",
-      "UI改为三个任务自动计分，当前0%；打磨保持开发者评分10%。小游戏功能分支成果按状态计分，main集成尚未开始。"
+      "序章中段按开发者批准细分为完成（权重7，已完成）与打磨（权重1，未开始），原验收并入完成，保留大项预算8。",
+      "开发者确认对话框UI与复读机UI已完成；暂停/设置等界面UI保持未开始，UI专属任务自动得分60%。",
+      "开发者确认当前main的天台段落验收、对话实现及验收、地图探索实现、事件实现、存读档实现均已通过，六项保留已完成并追加新提交证据。",
+      "花园尾声与普通NPC阶段对白已推进；序章后续两个事件仍为空，花园细节与NPC素材配置保持未开始。",
+      "Demo范围、任务预算与评分规则保持不变，打磨手动评分保持10%；小游戏仍为功能分支成果，main集成未开始。"
     ],
     "change_reasons": [
       {
-        "type": "demo_expansion",
-        "text": "首次正式范围以开发者草稿及确认结果为准，试运行快照归档，公开历史从本次起算。"
+        "type": "refinement",
+        "text": "开发者批准将序章中段原文案与演出、验收两项整理为完成7/打磨1，保留稳定ID、32个大项/75个子项、既有预算及范围规则版本。"
       },
       {
         "type": "verification",
-        "text": "开发者确认19项已完成任务均在main 9391261验收通过；其余任务按本次确认的状态记录。"
+        "text": "开发者确认序章中段完成项及对话框、复读机UI已完成，并确认六项天台/系统验收在当前main仍通过；逐项增加新来源证据，保留旧记录。"
       },
       {
-        "type": "rule_change",
-        "text": "UI按专属任务自动计分；功能分支按实际状态计分，主分支集成独立计算。"
+        "type": "implementation",
+        "text": "评估基线推进至main 41a6b7a的独立干净提交副本；补充花园尾声、普通NPC与记录系统的静态证据，未提交内容不计入本次评估。"
       }
     ],
     "dimension_reviews": {
-      "story": "前导、教室、校园推进和天台段落已验收。序章中后段演出、普通NPC对话、四个花园故事及整体流程验收仍需推进。",
-      "art": "前导地图、主教室基础、庭院基础及天台前区域已有确认成果。场景细节、地图边界、六个新增区域、角色、演出及音频仍有剩余工作。UI按三个任务自动计算，当前0%。",
-      "system": "对话、探索、事件和存读档基础实现已由开发者确认；部分系统整体验收仍待完成。小游戏分支成果计分，main集成尚未开始。",
-      "polish": "开发者手动评分10%，贡献整体3.0个百分点。"
+      "story": "前导、教室、校园推进和天台已有验收。序章中段完成项获开发者确认，打磨未开始；花园尾声已实现，后续两个事件仍为空。普通NPC、四个花园故事和完整序章验收继续跟踪。",
+      "art": "开发者确认对话框UI及复读机UI已完成，UI子分60%；暂停/设置UI与花园细节保持未开始。场景细节、地图边界、六个新增区域、角色正式素材、关键演出与音频仍有剩余工作。",
+      "system": "开发者确认当前main的对话实现/验收、探索实现、事件实现及存读档实现均通过；探索、事件和存读档的独立整体验收状态保持原值。记录系统仍有示例数据，Demo结束流程与小游戏main集成待完成。",
+      "polish": "保留开发者手动评分10%，贡献整体3.0个百分点；序章中段的打磨子项使用剧情大项既有权重1。"
     }
   }
 }
